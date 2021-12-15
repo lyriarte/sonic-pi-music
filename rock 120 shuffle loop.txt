@@ -1,0 +1,18 @@
+# Welcome to Sonic Pi v2.10
+
+use_bpm 120
+
+live_loop :foo do
+  4.times do
+    play chord(:e4, :minor7)
+    sleep 1
+  end
+  4.times do
+    play chord(:d4, :major)
+    sleep 1
+  end
+  8.times do
+    play chord(:a3, :"7")
+    sleep 1
+  end
+end
