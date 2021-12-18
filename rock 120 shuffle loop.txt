@@ -1,8 +1,10 @@
-# Welcome to Sonic Pi v2.10
+
+# Em7 |  D  |  A7 |  A7 | 
 
 use_bpm 120
 
-live_loop :foo do
+live_loop :chords do
+  use_synth (ring :tb303, :blade, :prophet, :saw, :beep, :tri).tick
   4.times do
     play chord(:e4, :minor7)
     sleep 1
@@ -15,4 +17,45 @@ live_loop :foo do
     play chord(:a3, :"7")
     sleep 1
   end
+end
+
+
+
+# Jungle beat
+
+use_bpm 120
+
+live_loop :hh_16 do
+  4.times do
+    sample :drum_cymbal_closed
+    sleep 0.25
+  end
+  sample :drum_cymbal_open, attack: 0.1, finish: 0.15
+  sleep 0.25
+  3.times do
+    sample :drum_cymbal_closed
+    sleep 0.25
+  end
+end
+
+
+live_loop :jungle_beat do
+  sample :drum_bass_hard
+  sleep 0.5
+  sample :drum_bass_hard
+  sleep 0.5
+  sample :drum_snare_hard
+  sleep 0.5
+  sample :drum_bass_hard
+  sleep 0.25
+  sample :drum_snare_hard
+  sleep 0.25
+  sample :drum_bass_hard
+  sleep 0.25
+  sample :drum_snare_hard
+  sleep 0.25
+  sample :drum_bass_hard
+  sleep 0.5
+  sample :drum_snare_hard
+  sleep 1.0
 end
