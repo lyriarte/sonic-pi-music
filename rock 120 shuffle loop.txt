@@ -3,21 +3,35 @@
 
 use_bpm 120
 
-live_loop :chords do
-  use_synth (ring :tb303, :blade, :prophet, :saw, :beep, :tri).tick
-  4.times do
-    play chord(:e4, :minor7)
-    sleep 1
-  end
-  4.times do
-    play chord(:d4, :major)
-    sleep 1
+live_loop :bass do
+  sync :jungle_beat
+  use_synth :chipbass
+  8.times do
+    play choose(chord(:e2, :minor7))
+    sleep 0.5
   end
   8.times do
-    play chord(:a3, :"7")
-    sleep 1
+    play choose(chord(:d2, :major))
+    sleep 0.5
+  end
+  16.times do
+    play choose(chord(:a1, :"7"))
+    sleep 0.5
   end
 end
+
+live_loop :chords do
+  use_synth :tb303
+  play chord(:e4, :minor7), attack: 1, release: 4
+  sleep 4
+  play chord(:d4, :major), attack: 1, release: 4
+  sleep 4
+  play chord(:a3, :"7"), attack: 1, release: 8
+  sleep 8
+end
+
+
+
 
 
 
