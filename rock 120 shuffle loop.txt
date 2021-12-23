@@ -1,4 +1,4 @@
-
+# https://soundcloud.com/m_u_l_e/rock120-shuffle-loop
 # Em7 |  D  |  A7 |  A7 |
 
 use_bpm 120
