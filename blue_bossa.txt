@@ -1,0 +1,28 @@
+# Blue bossa
+
+use_bpm 160
+beats = 4
+sub_beat = 4
+sub_beat_inv = 1 / Float(sub_beat)
+
+chords = [
+  (chord :C, :minor7),
+  (chord :C, :minor7),
+  (chord :F, :minor7),
+  (chord :F, :minor7),
+  
+  (chord :D, :dim7),
+  (chord :G, :dom7),
+  (chord :C, :minor7),
+  (chord :C, :minor7),
+  
+  (chord :Eb, :minor7),
+  (chord :Ab, :dom7),
+  (chord :Db, :major7),
+  (chord :Db, :major7),
+  
+  (chord :D, :dim7),
+  (chord :G, :dom7),
+  (chord :C, :minor7),
+  (chord :G, :dom7)
+].ring
