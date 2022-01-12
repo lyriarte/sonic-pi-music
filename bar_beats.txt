@@ -14,6 +14,8 @@ chords = [
 bar_chord = chords[0]
 
 
+# ---- live loops
+
 live_loop :bar_beats do
   cue :bar
   beats.times do
@@ -23,24 +25,52 @@ live_loop :bar_beats do
   bar_chord = chords.tick
 end
 
-
 live_loop :keys do
-  use_synth :blade
   sync :beat
-  play bar_chord, release:0.8
+  keys_chords_beat
 end
 
 live_loop :bass do
+  sync :beat
+  bass_rnd_double_beat
+end
+
+live_loop :cymbals do
+  sync :beat
+  drums_cymbals_sub_beat
+end
+
+live_loop :drums do
+  sync :bar
+  drums_jungle_beat_4
+end
+
+
+# ---- keys
+
+# one chord per beat
+define :keys_chords_beat do
+  use_synth :blade
+  play bar_chord, release:0.8
+end
+
+
+# ---- bass
+
+# random chord 2 notes per beat
+define :bass_rnd_double_beat do
   use_synth :subpulse
   use_octave -2
-  sync :beat
   play choose(bar_chord), release:0.2
   sleep 0.5
   play choose(bar_chord), release:0.2
 end
 
-live_loop :cymbals do
-  sync :beat
+
+# ---- drums
+
+# hi hat on sub beat
+define :drums_cymbals_sub_beat do
   sample :drum_cymbal_closed, amp: 0.5
   (sub_beat - 1).times do
     sleep (1 / Float(sub_beat))
@@ -48,8 +78,8 @@ live_loop :cymbals do
   end
 end
 
-live_loop :drums do
-  sync :bar
+# jungle beat, 4 beats per bar
+define :drums_jungle_beat_4 do
   sample :drum_bass_hard, amp: 0.5
   sleep 0.5
   sample :drum_bass_hard, amp: 0.25
@@ -73,3 +103,5 @@ live_loop :drums do
   sample :drum_snare_hard
   #  sleep 0.25
 end
+
+
