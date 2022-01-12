@@ -27,8 +27,10 @@ live_loop :bar_beats do
 end
 
 live_loop :keys do
-  sync :beat
-  keys_chords_beat
+  #sync :beat
+  #keys_chords_beat
+  sync :bar
+  keys_chords_bar
 end
 
 live_loop :bass do
@@ -59,7 +61,13 @@ end
 # one chord per beat
 define :keys_chords_beat do
   use_synth :blade
-  play bar_chord, release:0.8
+  play bar_chord, release: 0.8
+end
+
+# one chord per bar
+define :keys_chords_bar do
+  use_synth :blade
+  play bar_chord, release: beats
 end
 
 
