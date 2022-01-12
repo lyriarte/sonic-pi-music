@@ -3,6 +3,7 @@
 use_bpm 120
 beats = 4
 sub_beat = 4
+sub_beat_inv = 1 / Float(sub_beat)
 
 chords = [
   (chord :B, :minor),
@@ -73,7 +74,7 @@ end
 define :drums_cymbals_sub_beat do
   sample :drum_cymbal_closed, amp: 0.5
   (sub_beat - 1).times do
-    sleep (1 / Float(sub_beat))
+    sleep sub_beat_inv
     sample :drum_cymbal_closed, amp: 0.25
   end
 end
