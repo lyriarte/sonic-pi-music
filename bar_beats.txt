@@ -12,18 +12,18 @@ chords = [
   (chord :Fs, :dom7)
 ].ring
 
-bar_chord = chords[0]
+bar_chord = (chord :C, :major)
 
 
 # ---- live loops
 
 live_loop :bar_beats do
+  bar_chord = chords.tick
   cue :bar
   beats.times do
     cue :beat
     sleep 1
   end
-  bar_chord = chords.tick
 end
 
 live_loop :keys do
@@ -98,6 +98,7 @@ define :drums_cymbals_sub_beat do
     sleep sub_beat_inv
     sample :drum_cymbal_closed, amp: 0.25
   end
+  #sleep sub_beat_inv
 end
 
 # swing cymbals for ternary sub beat
