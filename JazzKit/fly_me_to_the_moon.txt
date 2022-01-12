@@ -1,0 +1,28 @@
+# Fly me to the moon
+
+use_bpm 120
+beats = 4
+sub_beat = 3
+sub_beat_inv = 1 / Float(sub_beat)
+
+chords = [
+  (chord :A, :minor7),
+  (chord :D, :minor7),
+  (chord :G, :dom7),
+  (chord :C, :major7),
+  
+  (chord :F, :major7),
+  (chord :B, :dim7),
+  (chord :E, :dom7),
+  (chord :A, :minor7),
+  
+  (chord :D, :minor7),
+  (chord :G, :dom7),
+  (chord :C, :major7),
+  (chord :A, :minor7),
+  
+  (chord :D, :minor7),
+  (chord :G, :dom7),
+  (chord :C, :major7),
+  (chord :E, :dom7)
+].ring
