@@ -34,15 +34,22 @@ end
 live_loop :bass do
   sync :beat
   bass_rnd_double_beat
+  #sync :bar
+  #bass_walking_4
 end
 
 live_loop :cymbals do
   sync :beat
   drums_cymbals_sub_beat
+  #drums_cymbals_swing_sub_3
 end
 
 live_loop :drums do
+  #sync :beat
+  #drums_bass_disco_beat
   sync :bar
+  #drums_base_beat_4
+  #drums_binary_beat_4
   drums_jungle_beat_4
 end
 
@@ -67,6 +74,20 @@ define :bass_rnd_double_beat do
   play choose(bar_chord), release:0.2
 end
 
+# walking bass, 4 beats per bar
+define :bass_walking_4 do
+  use_synth :subpulse
+  use_octave -2
+  play bar_chord[0], release:0.2, amp: 1.5
+  sleep 1
+  play choose(bar_chord), release:0.2
+  sleep 1
+  play choose(bar_chord), release:0.2
+  sleep 1
+  play choose(bar_chord), release:0.2
+  #sleep 1
+end
+
 
 # ---- drums
 
@@ -77,6 +98,48 @@ define :drums_cymbals_sub_beat do
     sleep sub_beat_inv
     sample :drum_cymbal_closed, amp: 0.25
   end
+end
+
+# swing cymbals for ternary sub beat
+define :drums_cymbals_swing_sub_3 do
+  sleep 0.5
+  sample :drum_cymbal_closed, amp: 0.5
+  sleep (sub_beat_inv * (sub_beat - 1)) / 2
+  sample :drum_cymbal_closed, amp: 0.5
+  sleep sub_beat_inv / 2
+  sample :drum_cymbal_open, amp: 0.25, finish: 0.15
+end
+
+# bass drum disco beat
+define :drums_bass_disco_beat do
+  sample :drum_bass_hard, amp: 1.25, rate: 2
+  #sleep 1
+end
+
+# base beat, 4 beats per bar
+define :drums_base_beat_4 do
+  sample :drum_bass_hard
+  sleep 1
+  sample :drum_bass_hard, amp: 0.5
+  sleep 1
+  sample :drum_snare_hard, amp: 0.5
+  sleep 1
+  sample :drum_bass_hard, amp: 0.5
+  #sleep 1
+end
+
+# binary beat, 4 beats per bar
+define :drums_binary_beat_4 do
+  sample :drum_bass_hard
+  sleep 1
+  sample :drum_snare_hard
+  sleep 0.5
+  sample :drum_bass_hard
+  sleep 0.5
+  sample :drum_bass_hard
+  sleep 1
+  sample :drum_snare_hard
+  #sleep 1
 end
 
 # jungle beat, 4 beats per bar
@@ -102,7 +165,7 @@ define :drums_jungle_beat_4 do
   sample :drum_bass_hard
   sleep 0.25
   sample :drum_snare_hard
-  #  sleep 0.25
+  #sleep 0.25
 end
 
 
