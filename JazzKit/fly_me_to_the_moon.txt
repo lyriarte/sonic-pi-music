@@ -1,9 +1,14 @@
 # Fly me to the moon
 
-use_bpm 120
+use_bpm 160
 beats = 4
 sub_beat = 3
 sub_beat_inv = 1 / Float(sub_beat)
+
+#keys_chords_bar
+#bass_walking
+#drums_cymbals_swing_sub_3_beat_4
+#drums_base_beat_4
 
 chords = [
   (chord :A, :minor7),

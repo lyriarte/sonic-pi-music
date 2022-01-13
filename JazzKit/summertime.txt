@@ -5,6 +5,11 @@ beats = 3
 sub_beat = 2
 sub_beat_inv = 1 / Float(sub_beat)
 
+#keys_chords_bar
+#bass_walking
+#drums_cymbals_sub_beat
+#
+
 chords = [
   (chord :D, :minor7),
   (chord :A, :dom7),

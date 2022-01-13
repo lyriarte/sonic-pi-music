@@ -2,8 +2,13 @@
 
 use_bpm 160
 beats = 4
-sub_beat = 4
+sub_beat = 2
 sub_beat_inv = 1 / Float(sub_beat)
+
+#keys_chords_bar
+#bass_latin_beat_4
+#drums_cymbals_sub_beat
+#drums_binary_beat_4
 
 chords = [
   (chord :C, :minor7),
