@@ -37,7 +37,7 @@ live_loop :bass do
   sync :beat
   bass_rnd_double_beat
   #sync :bar
-  #bass_walking_4
+  #bass_walking
 end
 
 live_loop :cymbals do
@@ -82,17 +82,15 @@ define :bass_rnd_double_beat do
   play choose(bar_chord), release:0.2
 end
 
-# walking bass, 4 beats per bar
-define :bass_walking_4 do
+# walking bass, fundamental on first beat
+define :bass_walking do
   use_synth :subpulse
   use_octave -2
   play bar_chord[0], release:0.2, amp: 1.5
-  sleep 1
-  play choose(bar_chord), release:0.2
-  sleep 1
-  play choose(bar_chord), release:0.2
-  sleep 1
-  play choose(bar_chord), release:0.2
+  (beats - 1).times do
+    sleep 1
+    play choose(bar_chord), release:0.2
+  end
   #sleep 1
 end
 
