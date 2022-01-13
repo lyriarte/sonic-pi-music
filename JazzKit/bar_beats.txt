@@ -44,6 +44,8 @@ live_loop :cymbals do
   sync :beat
   drums_cymbals_sub_beat
   #drums_cymbals_swing_sub_double_3
+  #sync :bar
+  #drums_cymbals_swing_sub_3_beat_4
 end
 
 live_loop :drums do
@@ -104,6 +106,22 @@ define :drums_cymbals_sub_beat do
     sleep sub_beat_inv
     sample :drum_cymbal_closed, amp: 0.25
   end
+  #sleep sub_beat_inv
+end
+
+# swing cymbals for ternary sub beat, 4 beats per bar
+define :drums_cymbals_swing_sub_3_beat_4 do
+  sample :drum_cymbal_open, amp: 0.25, finish: 0.15
+  sleep 1
+  sample :drum_cymbal_closed, amp: 0.5
+  sleep (sub_beat_inv * (sub_beat - 1))
+  sample :drum_cymbal_closed, amp: 0.5
+  sleep sub_beat_inv
+  sample :drum_cymbal_open, amp: 0.25, finish: 0.15
+  sleep 1
+  sample :drum_cymbal_closed, amp: 0.5
+  sleep (sub_beat_inv * (sub_beat - 1))
+  sample :drum_cymbal_closed, amp: 0.5
   #sleep sub_beat_inv
 end
 
