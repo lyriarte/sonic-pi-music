@@ -38,6 +38,7 @@ live_loop :bass do
   bass_rnd_double_beat
   #sync :bar
   #bass_walking
+  #bass_latin_beat_4
 end
 
 live_loop :cymbals do
@@ -94,6 +95,20 @@ define :bass_walking do
     play choose(bar_chord), release:0.2
   end
   #sleep 1
+end
+
+# latin bass, 4 beats per bar
+define :bass_latin_beat_4 do
+  use_synth :subpulse
+  use_octave -2
+  play bar_chord[0], release:0.2, amp: 2
+  sleep 1.5
+  play bar_chord[2], release:0.2
+  sleep 0.5
+  play bar_chord[2], release:0.2
+  sleep 1.5
+  play bar_chord[2], release:0.2
+  #sleep 0.5
 end
 
 
