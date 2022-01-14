@@ -1,15 +1,15 @@
 # Bar and beats synchronization
 
 use_bpm 120
-beats = 4
+beats = 2
 sub_beat = 4
 sub_beat_inv = 1 / Float(sub_beat)
 
 chords = [
+  (chord :C, :major),
   (chord :A, :minor),
   (chord :D, :minor),
-  (chord :G, :dom7),
-  (chord :C, :major)
+  (chord :G, :dom7)
 ].ring
 
 bar_chord = (chord :C, :major)
