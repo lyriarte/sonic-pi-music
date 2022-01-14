@@ -1,0 +1,14 @@
+# ---- keyboards
+
+# one chord per beat
+define :keys_chords_beat do
+  use_synth :blade
+  play bar_chord, amp: 0.5, release: 0.8
+end
+
+# one chord per bar
+define :keys_chords_bar do
+  use_synth :blade
+  play bar_chord, amp: 0.5, release: beats
+end
+
