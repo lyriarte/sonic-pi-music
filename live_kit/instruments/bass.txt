@@ -1,4 +1,7 @@
-# ---- bass
+# ---- ---- ---- ---- bass
+
+
+# ---- sync :beat
 
 # random chord 2 notes per beat
 define :bass_rnd_double_beat do
@@ -8,6 +11,9 @@ define :bass_rnd_double_beat do
   sleep 0.5
   play choose(bar_chord), release:0.2
 end
+
+
+# ---- sync :bar
 
 # walking bass, fundamental on first beat
 define :bass_walking do

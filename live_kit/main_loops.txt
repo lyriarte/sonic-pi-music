@@ -28,35 +28,23 @@ end
 
 live_loop :keys do
   #sync :beat
-  #keys_chords_beat
   sync :bar
   play bar_chord, amp: 0.5, release: beats
-  #keys_chords_bar
 end
 
 live_loop :bass do
   sync :beat
   play choose(bar_chord), release:0.2
-  #bass_rnd_double_beat
   #sync :bar
-  #bass_walking
-  #bass_latin_beat_4
 end
 
 live_loop :cymbals do
   sync :beat
   sample :drum_cymbal_closed, amp: 0.25
-  #drums_cymbals_sub_beat
-  #drums_cymbals_swing_sub_double_3
   #sync :bar
-  #drums_cymbals_swing_sub_3_beat_4
 end
 
 live_loop :drums do
   sync :beat
-  #drums_bass_disco_beat
   #sync :bar
-  #drums_base_beat_4
-  #drums_binary_beat_4
-  #drums_jungle_beat_4
 end
