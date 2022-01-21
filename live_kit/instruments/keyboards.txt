@@ -9,6 +9,11 @@ define :keys_chords_beat do
   play bar_chord, amp: 0.5, release: 0.8
 end
 
+# short chord odd sub beat
+define :keys_chords_odd_sub_beat do
+  sleep 0.5
+  play bar_chord, amp: 0.5, release: 0.1
+end
 
 # ---- sync :bar
 

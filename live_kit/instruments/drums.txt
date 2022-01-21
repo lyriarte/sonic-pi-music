@@ -16,6 +16,16 @@ define :drums_cymbals_sub_beat do
   #sleep sub_beat_inv
 end
 
+# hi hat open on beat
+define :drums_cymbals_hh_open_beat do
+  sample :drum_cymbal_open, amp: 0.5
+  sleep sub_beat_inv
+  (sub_beat - 2).times do
+    sleep sub_beat_inv
+    sample :drum_cymbal_closed, amp: 0.5
+  end
+  #sleep sub_beat_inv
+end
 
 # ---- sync :bar
 

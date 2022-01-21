@@ -12,6 +12,17 @@ define :bass_rnd_double_beat do
   play choose(bar_chord), release:0.2
 end
 
+# octave 2 notes per beat
+define :bass_octave_double_beat do
+  use_synth :subpulse
+  use_octave -2
+  use_transpose 0
+  play bar_chord[0], release:0.2
+  sleep 0.5
+  use_transpose 12
+  play bar_chord[0], release:0.2
+end
+
 
 # ---- sync :bar
 

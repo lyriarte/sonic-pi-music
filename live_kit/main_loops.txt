@@ -46,5 +46,6 @@ end
 
 live_loop :drums do
   sync :beat
+  sample :bd_haus
   #sync :bar
 end
