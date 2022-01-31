@@ -7,9 +7,9 @@
 define :bass_rnd_double_beat do
   use_synth :subpulse
   use_octave -2
-  play choose(bar_chord), release:0.2
+  play choose(x), release:0.2
   sleep 0.5
-  play choose(bar_chord), release:0.2
+  play choose(x), release:0.2
 end
 
 # octave 2 notes per beat
@@ -17,10 +17,10 @@ define :bass_octave_double_beat do
   use_synth :subpulse
   use_octave -2
   use_transpose 0
-  play bar_chord[0], release:0.2
+  play x[0], release:0.2
   sleep 0.5
   use_transpose 12
-  play bar_chord[0], release:0.2
+  play x[0], release:0.2
 end
 
 
@@ -30,10 +30,10 @@ end
 define :bass_walking do
   use_synth :subpulse
   use_octave -2
-  play bar_chord[0], release:0.2, amp: 1.5
+  play x[0], release:0.2, amp: 1.5
   (beats - 1).times do
     sleep 1
-    play choose(bar_chord), release:0.2
+    play choose(x), release:0.2
   end
   #sleep 1
 end
@@ -42,12 +42,12 @@ end
 define :bass_latin_beat_4 do
   use_synth :subpulse
   use_octave -2
-  play bar_chord[0], release:0.2, amp: 2
+  play x[0], release:0.2, amp: 2
   sleep 1.5
-  play bar_chord[2], release:0.2
+  play x[2], release:0.2
   sleep 0.5
-  play bar_chord[2], release:0.2
+  play x[2], release:0.2
   sleep 1.5
-  play bar_chord[2], release:0.2
+  play x[2], release:0.2
   #sleep 0.5
 end

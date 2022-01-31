@@ -6,13 +6,13 @@
 # one chord per beat
 define :keys_chords_beat do
   use_synth :blade
-  play bar_chord, amp: 0.5, release: 0.8
+  play x, amp: 0.5, release: 0.8
 end
 
 # short chord odd sub beat
 define :keys_chords_odd_sub_beat do
   sleep 0.5
-  play bar_chord, amp: 0.5, release: 0.1
+  play x, amp: 0.5, release: 0.1
 end
 
 # ---- sync :bar
@@ -20,6 +20,6 @@ end
 # one chord per bar
 define :keys_chords_bar do
   use_synth :blade
-  play bar_chord, amp: 0.5, release: beats
+  play x, amp: 0.5, release: beats
 end
 

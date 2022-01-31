@@ -24,13 +24,13 @@ chords = [
   (chord :C, :minor7),  (chord :G, :dom7)
 ].ring
 
-bar_chord = (chord :C, :major)
+x = (chord :C, :major)
 
 
 # ---- live loops
 
 live_loop :bar_beats do
-  bar_chord = chords.tick
+  x = chords.tick
   cue :bar
   beats.times do
     cue :beat
@@ -62,20 +62,20 @@ end
 # one chord per bar
 define :keys_chords_bar do
   use_synth :blade
-  play bar_chord, amp: 0.5, release: beats
+  play x, amp: 0.5, release: beats
 end
 
 # latin bass, 4 beats per bar
 define :bass_latin_beat_4 do
   use_synth :subpulse
   use_octave -2
-  play bar_chord[0], release:0.2, amp: 2
+  play x[0], release:0.2, amp: 2
   sleep 1.5
-  play bar_chord[2], release:0.2
+  play x[2], release:0.2
   sleep 0.5
-  play bar_chord[2], release:0.2
+  play x[2], release:0.2
   sleep 1.5
-  play bar_chord[2], release:0.2
+  play x[2], release:0.2
   #sleep 0.5
 end
 

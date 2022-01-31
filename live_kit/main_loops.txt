@@ -12,13 +12,13 @@ chords = [
   (chord :G, :dom7)
 ].ring
 
-bar_chord = (chord :C, :major)
+x = (chord :C, :major)
 
 
 # ---- live loops
 
 live_loop :bar_beats do
-  bar_chord = chords.tick
+  x = chords.tick
   cue :bar
   beats.times do
     cue :beat
@@ -28,13 +28,13 @@ end
 
 live_loop :keys do
   sync :bar
-  play bar_chord, amp: 0.5, release: beats
+  play x, amp: 0.5, release: beats
 end
 
 live_loop :bass do
   sync :beat
   use_octave -1
-  play choose(bar_chord), release:0.2
+  play choose(x), release:0.2
 end
 
 live_loop :cymbals do

@@ -32,13 +32,13 @@ chords = [
   (chord :E, :dim7),    (chord :A, :dom7)
 ].ring
 
-bar_chord = (chord :C, :major)
+x = (chord :C, :major)
 
 
 # ---- live loops
 
 live_loop :bar_beats do
-  bar_chord = chords.tick
+  x = chords.tick
   cue :bar
   beats.times do
     cue :beat
@@ -70,17 +70,17 @@ end
 # one chord per bar
 define :keys_chords_bar do
   use_synth :blade
-  play bar_chord, amp: 0.5, release: beats
+  play x, amp: 0.5, release: beats
 end
 
 # walking bass, fundamental on first beat
 define :bass_walking do
   use_synth :subpulse
   use_octave -2
-  play bar_chord[0], release:0.2, amp: 1.5
+  play x[0], release:0.2, amp: 1.5
   (beats - 1).times do
     sleep 1
-    play choose(bar_chord), release:0.2
+    play choose(x), release:0.2
   end
   #sleep 1
 end
