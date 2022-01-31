@@ -27,25 +27,22 @@ live_loop :bar_beats do
 end
 
 live_loop :keys do
-  #sync :beat
   sync :bar
   play bar_chord, amp: 0.5, release: beats
 end
 
 live_loop :bass do
   sync :beat
+  use_octave -1
   play choose(bar_chord), release:0.2
-  #sync :bar
 end
 
 live_loop :cymbals do
   sync :beat
   sample :drum_cymbal_closed, amp: 0.25
-  #sync :bar
 end
 
 live_loop :drums do
-  sync :beat
-  sample :bd_haus
-  #sync :bar
+  sync :bar
+  sample :drum_bass_soft
 end
