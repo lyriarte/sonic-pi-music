@@ -11,39 +11,86 @@ sub_beat_inv = 1 / Float(sub_beat)
 #
 
 chords = [
-  (chord :D, :minor7),
-  (chord :A, :dom7),
-  (chord :D, :minor7),
-  (chord :A, :dom7),
-  (chord :D, :minor7),
-  (chord :A, :dom7),
-  (chord :D, :minor7),
-  (chord :A, :dom7),
+  (chord :D, :minor7),  (chord :A, :dom7),
+  (chord :D, :minor7),  (chord :A, :dom7),
+  (chord :D, :minor7),  (chord :A, :dom7),
+  (chord :D, :minor7),  (chord :A, :dom7),
   
-  (chord :G, :minor7),
-  (chord :C, :dom7),
-  (chord :G, :minor7),
-  (chord :C, :dom7),
-  (chord :E, :dim7),
-  (chord :E, :dim7),
-  (chord :A, :dom7),
-  (chord :A, :dom7),
+  (chord :G, :minor7),  (chord :C, :dom7),
+  (chord :G, :minor7),  (chord :C, :dom7),
+  (chord :E, :dim7),    (chord :E, :dim7),
+  (chord :A, :dom7),    (chord :A, :dom7),
   
-  (chord :D, :minor7),
-  (chord :A, :dom7),
-  (chord :D, :minor7),
-  (chord :A, :dom7),
-  (chord :D, :minor7),
-  (chord :A, :dom7),
-  (chord :D, :minor7),
-  (chord :A, :dom7),
+  (chord :D, :minor7),  (chord :A, :dom7),
+  (chord :D, :minor7),  (chord :A, :dom7),
+  (chord :D, :minor7),  (chord :A, :dom7),
+  (chord :D, :minor7),  (chord :A, :dom7),
   
-  (chord :F, :major7),
-  (chord :Bb, :major),
-  (chord :E, :dim7),
-  (chord :A, :dom7),
-  (chord :D, :minor7),
-  (chord :D, :minor7),
-  (chord :E, :dim7),
-  (chord :A, :dom7)
+  (chord :F, :major7),  (chord :Bb, :major),
+  (chord :E, :dim7),    (chord :A, :dom7),
+  (chord :D, :minor7),  (chord :D, :minor7),
+  (chord :E, :dim7),    (chord :A, :dom7)
 ].ring
+
+bar_chord = (chord :C, :major)
+
+
+# ---- live loops
+
+live_loop :bar_beats do
+  bar_chord = chords.tick
+  cue :bar
+  beats.times do
+    cue :beat
+    sleep 1
+  end
+end
+
+live_loop :keys do
+  sync :bar
+  keys_chords_bar
+end
+
+live_loop :bass do
+  sync :bar
+  bass_walking
+end
+
+live_loop :cymbals do
+  sync :beat
+  drums_cymbals_sub_beat
+end
+
+live_loop :drums do
+  sync :bar
+  
+end
+
+
+# one chord per bar
+define :keys_chords_bar do
+  use_synth :blade
+  play bar_chord, amp: 0.5, release: beats
+end
+
+# walking bass, fundamental on first beat
+define :bass_walking do
+  use_synth :subpulse
+  use_octave -2
+  play bar_chord[0], release:0.2, amp: 1.5
+  (beats - 1).times do
+    sleep 1
+    play choose(bar_chord), release:0.2
+  end
+  #sleep 1
+end
+
+# hi hat on sub beat
+define :drums_cymbals_sub_beat do
+  sample :drum_cymbal_closed, amp: 0.5
+  (sub_beat - 1).times do
+    sleep sub_beat_inv
+    sample :drum_cymbal_closed, amp: 0.25
+  end
+  #sleep sub_beat_inv
+end
