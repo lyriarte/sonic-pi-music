@@ -70,6 +70,14 @@ end
 
 # ---- sync :bar
 
+# sparse beat, 4 beats per bar
+define :drums_sparse_beat_4 do
+  sample :drum_bass_hard
+  sleep 2
+  sample :drum_snare_hard
+  #sleep 2
+end
+
 # base beat, 4 beats per bar
 define :drums_base_beat_4 do
   sample :drum_bass_hard
