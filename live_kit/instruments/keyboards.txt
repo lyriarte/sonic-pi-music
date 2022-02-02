@@ -4,22 +4,23 @@
 # ---- sync :beat
 
 # one chord per beat
-define :keys_chords_beat do
-  use_synth :blade
-  play x, amp: 0.5, release: 0.8
+define :keys_chords_beat do | ch, am=1, sy=:blade |
+  use_synth sy
+  play ch, amp: am, release: 0.8
 end
 
 # short chord odd sub beat
-define :keys_chords_odd_sub_beat do
+define :keys_chords_odd_sub_beat do | ch, am=1, sy=:blade |
+  use_synth sy
   sleep 0.5
-  play x, amp: 0.5, release: 0.1
+  play ch, amp: am, release: 0.1
 end
 
 # ---- sync :bar
 
 # one chord per bar
-define :keys_chords_bar do
-  use_synth :blade
-  play x, amp: 0.5, release: beats
+define :keys_chords_bar do | ch, nb=4, am=1, sy=:blade |
+  use_synth sy
+  play ch, amp: am, release: nb
 end
 
