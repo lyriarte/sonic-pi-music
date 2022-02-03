@@ -1,6 +1,15 @@
 # ---- ---- ---- ---- bass
 
 
+# ---- live loops
+
+live_loop :bass do
+  sync :beat
+  bass_rnd_double_beat get(:chrd)
+end
+
+
+
 # ---- sync :beat
 
 # random chord 2 notes per beat

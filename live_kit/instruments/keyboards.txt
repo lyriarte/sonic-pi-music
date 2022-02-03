@@ -1,6 +1,13 @@
 # ---- ---- ---- ---- keyboards
 
 
+# ---- live loops
+
+live_loop :keys do
+  sync :bar
+  keys_chords_beat get(:chrd)
+end
+
 # ---- sync :beat
 
 # one chord per beat

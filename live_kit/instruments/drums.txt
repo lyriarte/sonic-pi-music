@@ -1,6 +1,19 @@
 # ---- ---- ---- ---- cymbals and drums
 
 
+# ---- live loops
+
+live_loop :cymbals do
+  sync :beat
+  drums_cymbals_sub_beat sb = get(:sub_beat)
+end
+
+live_loop :drums do
+  sync :bar
+  drums_bass_disco_beat
+end
+
+
 
 # ---- ---- cymbals
 
@@ -10,7 +23,7 @@
 define :drums_cymbals_sub_beat do | sb=4, am=1|
   sample :drum_cymbal_closed, amp: 0.5 * am
   (sb - 1).times do
-    sleep 1/sb
+    sleep 1/Float(sb)
     sample :drum_cymbal_closed, amp: 0.25 * am
   end
   #sleep 1/sb
@@ -19,9 +32,9 @@ end
 # hi hat open on beat
 define :drums_cymbals_hh_open_beat do | sb=4, am=1|
   sample :drum_cymbal_open, amp: 0.5 * am
-  sleep 1/sb
+  sleep 1/Float(sb)
   (sb - 2).times do
-    sleep 1/sb
+    sleep 1/Float(sb)
     sample :drum_cymbal_closed, amp: 0.5 * am
   end
   #sleep 1/sb
@@ -34,24 +47,24 @@ define :drums_cymbals_swing_sub_3_beat_4 do | sb=3, am=1|
   sample :drum_cymbal_open, amp: 0.25 * am, finish: 0.15
   sleep 1
   sample :drum_cymbal_closed, amp: 0.5 * am
-  sleep (1/sb * (sb - 1))
+  sleep (1/Float(sb) * (sb - 1))
   sample :drum_cymbal_closed, amp: 0.5 * am
-  sleep 1/sb
+  sleep 1/Float(sb)
   sample :drum_cymbal_open, amp: 0.25 * am, finish: 0.15
   sleep 1
   sample :drum_cymbal_closed, amp: 0.5 * am
-  sleep (1/sb * (sb - 1))
+  sleep (1/Float(sb) * (sb - 1))
   sample :drum_cymbal_closed, amp: 0.5 * am
-  #sleep 1/sb
+  #sleep 1/Float(sb)
 end
 
 # swing cymbals for double ternary sub beat
 define :drums_cymbals_swing_sub_double_3 do | sb=3, am=1|
   sleep 0.5
   sample :drum_cymbal_closed, amp: 0.5 * am
-  sleep (1/sb * (sb - 1)) / 2
+  sleep (1/Float(sb) * (sb - 1)) / 2
   sample :drum_cymbal_closed, amp: 0.5 * am
-  sleep 1/sb / 2
+  sleep 1/Float(sb) / 2
   sample :drum_cymbal_open, amp: 0.25 * am, finish: 0.15
 end
 
@@ -123,7 +136,7 @@ define :drums_double_beat_4 do | am=1|
   sample :drum_bass_hard, amp: am
   sleep 0.25
   sample :drum_snare_hard, amp: am
-#  sleep 0.5
+  #  sleep 0.5
 end
 
 

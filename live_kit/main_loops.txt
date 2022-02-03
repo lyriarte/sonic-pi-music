@@ -1,9 +1,9 @@
 # Bar and beats synchronization
 
 use_bpm 120
-beats = 2
-sub_beat = 4
-sub_beat_inv = 1 / Float(sub_beat)
+set :beats, 2
+set :sub_beat, 4
+
 
 chords = [
   (chord :C, :major),
@@ -12,37 +12,19 @@ chords = [
   (chord :G, :dom7)
 ].ring
 
-x = (chord :C, :major)
+set :chrd, (chord :C, :major)
 
 
 # ---- live loops
 
 live_loop :bar_beats do
-  x = chords.tick
+  set :chrd, chords.tick
   cue :bar
-  beats.times do
+  (get :beats).times do
     cue :beat
     sleep 1
   end
 end
 
-live_loop :keys do
-  sync :bar
-  play x, amp: 0.5, release: beats
-end
 
-live_loop :bass do
-  sync :beat
-  use_octave -1
-  play choose(x), release:0.2
-end
 
-live_loop :cymbals do
-  sync :beat
-  sample :drum_cymbal_closed, amp: 0.25
-end
-
-live_loop :drums do
-  sync :bar
-  sample :drum_bass_soft
-end
