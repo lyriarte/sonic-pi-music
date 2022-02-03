@@ -1,16 +1,15 @@
 # Fly me to the moon
 
 use_bpm 160
-beats = 4
-sub_beat = 3
-sub_beat_inv = 1 / Float(sub_beat)
+set :beats, 4
+set :sub_beat, 3
 
 #keys_chords_bar
 #bass_walking
 #drums_cymbals_swing_sub_3_beat_4
 #drums_base_beat_4
 
-chords = [
+set :chords, [
   (chord :A, :minor7),  (chord :D, :minor7),
   (chord :G, :dom7),    (chord :C, :major7),
   
@@ -23,84 +22,3 @@ chords = [
   (chord :D, :minor7),  (chord :G, :dom7),
   (chord :C, :major7),  (chord :E, :dom7)
 ].ring
-
-x = (chord :C, :major)
-
-
-# ---- live loops
-
-live_loop :bar_beats do
-  x = chords.tick
-  cue :bar
-  beats.times do
-    cue :beat
-    sleep 1
-  end
-end
-
-live_loop :keys do
-  sync :bar
-  keys_chords_bar
-end
-
-live_loop :bass do
-  sync :bar
-  bass_walking
-end
-
-live_loop :cymbals do
-  sync :bar
-  drums_cymbals_swing_sub_3_beat_4
-end
-
-live_loop :drums do
-  sync :bar
-  sample :drum_bass_soft
-end
-
-
-# one chord per bar
-define :keys_chords_bar do
-  use_synth :blade
-  play x, amp: 0.5, release: beats
-end
-
-# walking bass, fundamental on first beat
-define :bass_walking do
-  use_synth :subpulse
-  use_octave -2
-  play x[0], release:0.2, amp: 1.5
-  (beats - 1).times do
-    sleep 1
-    play choose(x), release:0.2
-  end
-  #sleep 1
-end
-
-# swing cymbals for ternary sub beat, 4 beats per bar
-define :drums_cymbals_swing_sub_3_beat_4 do
-  sample :drum_cymbal_open, amp: 0.25, finish: 0.15
-  sleep 1
-  sample :drum_cymbal_closed, amp: 0.5
-  sleep (sub_beat_inv * (sub_beat - 1))
-  sample :drum_cymbal_closed, amp: 0.5
-  sleep sub_beat_inv
-  sample :drum_cymbal_open, amp: 0.25, finish: 0.15
-  sleep 1
-  sample :drum_cymbal_closed, amp: 0.5
-  sleep (sub_beat_inv * (sub_beat - 1))
-  sample :drum_cymbal_closed, amp: 0.5
-  #sleep sub_beat_inv
-end
-
-# base beat, 4 beats per bar
-define :drums_base_beat_4 do
-  sample :drum_bass_hard
-  sleep 1
-  sample :drum_bass_hard, amp: 0.5
-  sleep 1
-  sample :drum_snare_hard, amp: 0.5
-  sleep 1
-  sample :drum_bass_hard, amp: 0.5
-  #sleep 1
-end

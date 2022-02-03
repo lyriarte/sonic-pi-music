@@ -5,7 +5,7 @@ set :beats, 2
 set :sub_beat, 4
 
 
-chords = [
+set :chords, [
   (chord :C, :major),
   (chord :A, :minor),
   (chord :D, :minor),
@@ -18,7 +18,7 @@ set :chrd, (chord :C, :major)
 # ---- live loops
 
 live_loop :bar_beats do
-  set :chrd, chords.tick
+  set :chrd, (get :chords).tick
   cue :bar
   (get :beats).times do
     cue :beat

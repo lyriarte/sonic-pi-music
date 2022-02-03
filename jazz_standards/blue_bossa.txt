@@ -1,16 +1,15 @@
 # Blue bossa
 
 use_bpm 160
-beats = 4
-sub_beat = 2
-sub_beat_inv = 1 / Float(sub_beat)
+set :beats, 4
+set :sub_beat, 2
 
 #keys_chords_bar
 #bass_latin_beat_4
 #drums_cymbals_sub_beat
 #drums_binary_beat_4
 
-chords = [
+set :chords, [
   (chord :C, :minor7),  (chord :C, :minor7),
   (chord :F, :minor7),  (chord :F, :minor7),
   
@@ -23,83 +22,3 @@ chords = [
   (chord :D, :dim7),    (chord :G, :dom7),
   (chord :C, :minor7),  (chord :G, :dom7)
 ].ring
-
-x = (chord :C, :major)
-
-
-# ---- live loops
-
-live_loop :bar_beats do
-  x = chords.tick
-  cue :bar
-  beats.times do
-    cue :beat
-    sleep 1
-  end
-end
-
-live_loop :keys do
-  sync :bar
-  keys_chords_bar
-end
-
-live_loop :bass do
-  sync :bar
-  bass_latin_beat_4
-end
-
-live_loop :cymbals do
-  sync :beat
-  drums_cymbals_sub_beat
-end
-
-live_loop :drums do
-  sync :bar
-  drums_binary_beat_4
-end
-
-
-# one chord per bar
-define :keys_chords_bar do
-  use_synth :blade
-  play x, amp: 0.5, release: beats
-end
-
-# latin bass, 4 beats per bar
-define :bass_latin_beat_4 do
-  use_synth :subpulse
-  use_octave -2
-  play x[0], release:0.2, amp: 2
-  sleep 1.5
-  play x[2], release:0.2
-  sleep 0.5
-  play x[2], release:0.2
-  sleep 1.5
-  play x[2], release:0.2
-  #sleep 0.5
-end
-
-# hi hat on sub beat
-define :drums_cymbals_sub_beat do
-  sample :drum_cymbal_closed, amp: 0.5
-  (sub_beat - 1).times do
-    sleep sub_beat_inv
-    sample :drum_cymbal_closed, amp: 0.25
-  end
-  #sleep sub_beat_inv
-end
-
-# binary beat, 4 beats per bar
-define :drums_binary_beat_4 do
-  sample :drum_bass_hard
-  sleep 1
-  sample :drum_snare_hard
-  sleep 0.5
-  sample :drum_bass_hard
-  sleep 0.5
-  sample :drum_bass_hard
-  sleep 1
-  sample :drum_snare_hard
-  #sleep 1
-end
-

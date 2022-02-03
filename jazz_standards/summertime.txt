@@ -1,16 +1,15 @@
 # Summertime
 
 use_bpm 140
-beats = 3
-sub_beat = 2
-sub_beat_inv = 1 / Float(sub_beat)
+set :beats, 3
+set :sub_beat, 2
 
 #keys_chords_bar
 #bass_walking
 #drums_cymbals_sub_beat
 #
 
-chords = [
+set :chords, [
   (chord :D, :minor7),  (chord :A, :dom7),
   (chord :D, :minor7),  (chord :A, :dom7),
   (chord :D, :minor7),  (chord :A, :dom7),
@@ -31,66 +30,3 @@ chords = [
   (chord :D, :minor7),  (chord :D, :minor7),
   (chord :E, :dim7),    (chord :A, :dom7)
 ].ring
-
-x = (chord :C, :major)
-
-
-# ---- live loops
-
-live_loop :bar_beats do
-  x = chords.tick
-  cue :bar
-  beats.times do
-    cue :beat
-    sleep 1
-  end
-end
-
-live_loop :keys do
-  sync :bar
-  keys_chords_bar
-end
-
-live_loop :bass do
-  sync :bar
-  bass_walking
-end
-
-live_loop :cymbals do
-  sync :beat
-  drums_cymbals_sub_beat
-end
-
-live_loop :drums do
-  sync :bar
-  
-end
-
-
-# one chord per bar
-define :keys_chords_bar do
-  use_synth :blade
-  play x, amp: 0.5, release: beats
-end
-
-# walking bass, fundamental on first beat
-define :bass_walking do
-  use_synth :subpulse
-  use_octave -2
-  play x[0], release:0.2, amp: 1.5
-  (beats - 1).times do
-    sleep 1
-    play choose(x), release:0.2
-  end
-  #sleep 1
-end
-
-# hi hat on sub beat
-define :drums_cymbals_sub_beat do
-  sample :drum_cymbal_closed, amp: 0.5
-  (sub_beat - 1).times do
-    sleep sub_beat_inv
-    sample :drum_cymbal_closed, amp: 0.25
-  end
-  #sleep sub_beat_inv
-end
