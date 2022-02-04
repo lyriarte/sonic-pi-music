@@ -1,5 +1,5 @@
 # ---- ---- ---- ---- keyboards
-use_bpm 120
+use_bpm get(:bpm)
 
 # ---- live loops
 
