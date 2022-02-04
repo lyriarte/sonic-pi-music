@@ -1,6 +1,6 @@
-# Bar and beats synchronization
-
+#  ---- ----  ----  ---- live loops synchro
 use_bpm 120
+
 set :beats, 2
 set :sub_beat, 4
 
