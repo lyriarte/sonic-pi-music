@@ -5,12 +5,23 @@ use_bpm get(:bpm)
 
 live_loop :bass do
   sync :beat
-  bass_rnd_double_beat get(:chrd)
+  bass_sub_beat get(:chrd)
 end
 
 
 
 # ---- sync :beat
+
+# bass sub beat
+define :bass_sub_beat do | ch, sb=4, am=1, sy=:subpulse |
+  use_synth sy
+  use_octave -2
+  play ch[0], release:0.2, amp: am
+  (sb - 1).times do
+    sleep 1/Float(sb)
+    play ch[0], release:0.2, amp: am
+  end
+end
 
 # random chord 2 notes per beat
 define :bass_rnd_double_beat do | ch, am=1, sy=:subpulse |
