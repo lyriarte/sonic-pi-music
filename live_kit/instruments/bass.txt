@@ -4,8 +4,15 @@ use_bpm get(:bpm)
 # ---- live loops
 
 live_loop :bass do
-  sync :beat
-  bass_sub_beat get(:chrd)
+  i_beat = (sync :beat)[0]
+  use_synth :subpulse
+  use_octave -2
+  if (i_beat % 2) == 0
+    use_transpose 0
+  else
+    use_transpose 12
+  end
+  play (get :chrd)[0]
 end
 
 
