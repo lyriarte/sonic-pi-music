@@ -18,13 +18,18 @@ set :chrd, (chord :C, :major)
 
 # ---- live loops
 
+i_bar = 0
+i_beat = 0
+
 live_loop :bar_beats do
   set :chrd, (get :chords).tick
-  cue :bar
+  cue :bar, i_bar
   (get :beats).times do
-    cue :beat
+    cue :beat, i_beat
     sleep 1
+    i_beat = (i_beat + 1) % (get :beats)
   end
+  i_bar = (i_bar + 1) % (get :chords).length()
 end
 
 
