@@ -1,19 +1,5 @@
 #  ---- ----  ----  ---- live loops synchro
 
-#  ---- defaults
-
-set :beats, 2
-set :sub_beat, 4
-
-set :chords, [
-  (chord :C, :major),
-  (chord :A, :minor),
-  (chord :D, :minor),
-  (chord :G, :dom7)
-].ring
-
-set :chrd, (chord :C, :major)
-
 # ---- start
 
 sync :start
@@ -31,16 +17,16 @@ live_loop :bar_beats do
   end
   while true do
     set :chrd, (get :chords).tick
-    cue :bar, i_bar
+    cue :bar, i_bar, (get :chrd)
     (get :beats).times do
-      cue :beat, i_beat
+      cue :beat, i_beat, (get :chrd)
       sleep 1
       i_beat = (i_beat + 1) % (get :beats)
     end
     i_bar = (i_bar + 1) % (get :chords).length()
   end
 end
-  
 
+  
   
   
