@@ -1,5 +1,8 @@
 # ---- ---- ---- ---- cymbals and drums
+
+sync :start
 use_bpm get(:bpm)
+
 
 # ---- live loops
 

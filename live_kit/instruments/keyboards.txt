@@ -1,5 +1,8 @@
 # ---- ---- ---- ---- keyboards
+
+sync :start
 use_bpm get(:bpm)
+
 
 # ---- live loops
 

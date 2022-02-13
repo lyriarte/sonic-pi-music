@@ -1,10 +1,9 @@
 #  ---- ----  ----  ---- live loops synchro
-set :bpm, 120
-use_bpm get(:bpm)
+
+#  ---- defaults
 
 set :beats, 2
 set :sub_beat, 4
-
 
 set :chords, [
   (chord :C, :major),
@@ -15,22 +14,33 @@ set :chords, [
 
 set :chrd, (chord :C, :major)
 
+# ---- start
 
-# ---- live loops
+sync :start
+use_bpm get(:bpm)
+
+# ---- main live loop
 
 i_bar = 0
 i_beat = 0
 
 live_loop :bar_beats do
-  set :chrd, (get :chords).tick
-  cue :bar, i_bar
   (get :beats).times do
-    cue :beat, i_beat
+    sample :drum_cymbal_closed
     sleep 1
-    i_beat = (i_beat + 1) % (get :beats)
   end
-  i_bar = (i_bar + 1) % (get :chords).length()
+  while true do
+    set :chrd, (get :chords).tick
+    cue :bar, i_bar
+    (get :beats).times do
+      cue :beat, i_beat
+      sleep 1
+      i_beat = (i_beat + 1) % (get :beats)
+    end
+    i_bar = (i_bar + 1) % (get :chords).length()
+  end
 end
+  
 
-
-
+  
+  
