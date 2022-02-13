@@ -1,6 +1,6 @@
 # Fly me to the moon
 
-use_bpm 160
+set :bpm, 160
 set :beats, 4
 set :sub_beat, 3
 
@@ -22,3 +22,5 @@ set :chords, [
   (chord :D, :minor7),  (chord :G, :dom7),
   (chord :C, :major7),  (chord :E, :dom7)
 ].ring
+
+cue :start

@@ -1,6 +1,6 @@
 # Blue bossa
 
-use_bpm 160
+set :bpm, 160
 set :beats, 4
 set :sub_beat, 2
 
@@ -22,3 +22,5 @@ set :chords, [
   (chord :D, :dim7),    (chord :G, :dom7),
   (chord :C, :minor7),  (chord :G, :dom7)
 ].ring
+
+cue :start
