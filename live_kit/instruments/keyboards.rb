@@ -72,3 +72,22 @@ define :bar_slide do | ch, nb=4, am=1, sy=:blade |
   play n0
   #sleep 1
 end
+
+# latin clave on 2 bars
+define :keys_latin_2_bar_4 do | ch, br, am=1, sy=:fm |
+  use_synth sy
+  if br % 2 == 0 then
+    play ch, amp: am, release: 0.2
+    sleep 1
+    play ch, amp: am, release: 0.2
+    sleep 1.5
+    play ch, amp: am, release: 0.2
+    sleep 1
+    play ch, amp: am, release: 0.2
+  else
+    sleep 0.5
+    play ch, amp: am, release: 0.2
+    sleep 1
+    play ch, amp: am, release: 0.2
+  end
+end

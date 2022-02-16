@@ -8,23 +8,36 @@ set :chords, [
   (chord :C, :minor7),  (chord :C, :minor7),
   (chord :F, :minor7),  (chord :F, :minor7),
   
-  (chord :D, :dim7),    (chord :G, :dom7),
+  (chord :D, :dim7),    (chord :G3, :dom7),
   (chord :C, :minor7),  (chord :C, :minor7),
   
-  (chord :Eb, :minor7), (chord :Ab, :dom7),
+  (chord :Eb, :minor7), (chord :Ab3, :dom7),
   (chord :Db, :major7), (chord :Db, :major7),
   
-  (chord :D, :dim7),    (chord :G, :dom7),
-  (chord :C, :minor7),  (chord :G, :dom7)
+  (chord :D, :dim7),    (chord :G3, :dom7),
+  (chord :C, :minor7),  (chord :G3, :dom7)
 ].ring
 
 
 # ---- instruments
 
-# one chord per bar
-define :keys_chords_bar do | ch, nb=4, am=1, sy=:blade |
+# latin clave on 2 bars
+define :keys_latin_2_bar_4 do | ch, br, am=1, sy=:fm |
   use_synth sy
-  play ch, amp: am, release: nb
+  if br % 2 == 0 then
+    play ch, amp: am, release: 0.2
+    sleep 1
+    play ch, amp: am, release: 0.2
+    sleep 1.5
+    play ch, amp: am, release: 0.2
+    sleep 1
+    play ch, amp: am, release: 0.2
+  else
+    sleep 0.5
+    play ch, amp: am, release: 0.2
+    sleep 1
+    play ch, amp: am, release: 0.2
+  end
 end
 
 # latin bass, 4 beats per bar
@@ -70,8 +83,8 @@ end
 use_bpm get(:bpm)
 
 live_loop :keys do
-  ch = (sync :bar)[1]
-  keys_chords_bar ch, 0.5
+  br, ch = (sync :bar)
+  keys_latin_2_bar_4 ch, br
 end
 
 live_loop :bass do
@@ -81,12 +94,12 @@ end
 
 live_loop :cymbals do
   sync :beat
-  drums_cymbals_sub_beat sb = get(:sub_beat)
+  drums_cymbals_sub_beat sb = get(:sub_beat), 0.5
 end
 
 live_loop :drums do
   sync :bar
-  drums_binary_beat_4 0.25
+  drums_binary_beat_4 0.1
 end
 
 # ---- start
