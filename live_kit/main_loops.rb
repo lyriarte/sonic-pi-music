@@ -26,7 +26,13 @@ live_loop :bar_beats do
     i_bar = (i_bar + 1) % (get :chords).length()
   end
 end
-
   
-  
-  
+# movement phases
+live_loop :movement_phases do
+  i_phase = (sync :phase)[0]
+  i_bar = (sync :bar)[0]
+  while i_bar != (get :chords).length() - 1 do
+    i_bar = (sync :bar)[0]
+  end
+  set :chords, (get :phases)[i_phase % (get :phases).length()]
+end
