@@ -9,6 +9,7 @@ use_bpm get(:bpm)
 
 i_bar = 0
 i_beat = 0
+set :n_bar, 0
 
 live_loop :bar_beats do
   (get :beats).times do
@@ -24,6 +25,7 @@ live_loop :bar_beats do
       i_beat = (i_beat + 1) % (get :beats)
     end
     i_bar = (i_bar + 1) % (get :chords).length()
+    set :n_bar, (get :n_bar) + 1
   end
 end
   
