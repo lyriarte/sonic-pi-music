@@ -56,6 +56,17 @@ end
 
 # ---- sync :bar
 
+# base bass beat, 4 beats per bar
+define :bass_base_beat do | ch, nb=4, am=1, sy=:beep |
+  use_synth sy
+  use_octave -2
+  play ch[0], amp: am
+  sleep 1.5
+  play ch[0], amp: am
+  sleep 0.5
+  play ch[0], amp: am
+end
+
 # walking bass, fundamental on first beat
 define :bass_walking do | ch, nb=4, am=1, sy=:beep |
   use_synth sy
