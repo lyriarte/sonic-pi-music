@@ -30,13 +30,13 @@ set :chords, [
 # ---- instruments
 
 # one chord per bar
-define :keys_chords_bar do | ch, nb=4, am=1, sy=:blade |
+define :keys_chords_bar do | ch, nb=4, am=1, sy=:beep |
   use_synth sy
   play ch, amp: am, release: nb
 end
 
 # walking bass, fundamental on first beat
-define :bass_walking do | ch, nb=4, am=1, sy=:subpulse |
+define :bass_walking do | ch, nb=4, am=1, sy=:beep |
   use_synth sy
   use_octave -2
   play ch[0], release:0.2, amp: 1.5 * am

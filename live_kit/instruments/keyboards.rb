@@ -14,20 +14,20 @@ end
 # ---- sync :beat
 
 # one chord per beat
-define :keys_chords_beat do | ch, am=1, sy=:blade |
+define :keys_chords_beat do | ch, am=1, sy=:beep |
   use_synth sy
   play ch, amp: am, release: 0.8
 end
 
 # short chord odd sub beat
-define :keys_chords_odd_sub_beat do | ch, am=1, sy=:blade |
+define :keys_chords_odd_sub_beat do | ch, am=1, sy=:beep |
   use_synth sy
   sleep 0.5
   play ch, amp: am, release: 0.1
 end
 
 # short double sub random
-define :keys_rnd_dbl_sub_beat do | ch, sb=4, am=1, sy=:blade |
+define :keys_rnd_dbl_sub_beat do | ch, sb=4, am=1, sy=:beep |
   use_synth sy
   play ch.choose, release: 0.05
   (2*sb - 1).times do
@@ -37,7 +37,7 @@ define :keys_rnd_dbl_sub_beat do | ch, sb=4, am=1, sy=:blade |
 end
 
 # short double sub slide
-define :keys_rnd_sub_slide do | ch, sb=4, am=1, sy=:blade |
+define :keys_rnd_sub_slide do | ch, sb=4, am=1, sy=:beep |
   use_synth sy
   n0 = ch.choose()
   (sb - 1).times do
@@ -53,13 +53,13 @@ end
 # ---- sync :bar
 
 # one chord per bar
-define :keys_chords_bar do | ch, nb=4, am=1, sy=:blade |
+define :keys_chords_bar do | ch, nb=4, am=1, sy=:beep |
   use_synth sy
   play ch, amp: am, release: nb
 end
 
 # slide within random notes in the current chord
-define :bar_slide do | ch, nb=4, am=1, sy=:blade |
+define :bar_slide do | ch, nb=4, am=1, sy=:beep |
   use_synth sy
   n0 = ch.choose()
   (nb - 1).times do

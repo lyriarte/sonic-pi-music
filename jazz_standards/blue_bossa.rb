@@ -41,7 +41,7 @@ define :keys_latin_2_bar_4 do | ch, br, am=1, sy=:fm |
 end
 
 # latin bass, 4 beats per bar
-define :bass_latin_beat_4 do | ch, am=1, sy=:subpulse |
+define :bass_latin_beat_4 do | ch, am=1, sy=:beep |
   use_synth sy
   use_octave -2
   play ch[0], release:0.2, amp: 2 * am

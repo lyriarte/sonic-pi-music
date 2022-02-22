@@ -8,7 +8,7 @@ use_bpm get(:bpm)
 
 live_loop :bass do
   i_beat = (sync :beat)[0]
-  use_synth :subpulse
+  use_synth :beep
   use_octave -2
   if (i_beat % 2) == 0
     use_transpose 0
@@ -23,7 +23,7 @@ end
 # ---- sync :beat
 
 # bass sub beat
-define :bass_sub_beat do | ch, sb=4, am=1, sy=:subpulse |
+define :bass_sub_beat do | ch, sb=4, am=1, sy=:beep |
   use_synth sy
   use_octave -2
   play ch[0], release:0.2, amp: am
@@ -34,7 +34,7 @@ define :bass_sub_beat do | ch, sb=4, am=1, sy=:subpulse |
 end
 
 # random chord 2 notes per beat
-define :bass_rnd_double_beat do | ch, am=1, sy=:subpulse |
+define :bass_rnd_double_beat do | ch, am=1, sy=:beep |
   use_synth sy
   use_octave -2
   play choose(ch), release:0.2, amp: am
@@ -43,7 +43,7 @@ define :bass_rnd_double_beat do | ch, am=1, sy=:subpulse |
 end
 
 # octave 2 notes per beat
-define :bass_octave_double_beat do | ch, am=1, sy=:subpulse |
+define :bass_octave_double_beat do | ch, am=1, sy=:beep |
   use_synth sy
   use_octave -2
   use_transpose 0
@@ -57,7 +57,7 @@ end
 # ---- sync :bar
 
 # walking bass, fundamental on first beat
-define :bass_walking do | ch, nb=4, am=1, sy=:subpulse |
+define :bass_walking do | ch, nb=4, am=1, sy=:beep |
   use_synth sy
   use_octave -2
   play ch[0], release:0.2, amp: 1.5 * am
@@ -69,7 +69,7 @@ define :bass_walking do | ch, nb=4, am=1, sy=:subpulse |
 end
 
 # latin bass, 4 beats per bar
-define :bass_latin_beat_4 do | ch, am=1, sy=:subpulse |
+define :bass_latin_beat_4 do | ch, am=1, sy=:beep |
   use_synth sy
   use_octave -2
   play ch[0], release:0.2, amp: 2 * am
@@ -81,3 +81,4 @@ define :bass_latin_beat_4 do | ch, am=1, sy=:subpulse |
   play ch[2], release:0.2, amp: am
   #sleep 0.5
 end
+
