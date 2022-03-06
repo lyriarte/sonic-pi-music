@@ -7,15 +7,8 @@ use_bpm get(:bpm)
 # ---- live loops
 
 live_loop :bass do
-  i_beat = (sync :beat)[0]
-  use_synth :beep
-  use_octave -2
-  if (i_beat % 2) == 0
-    use_transpose 0
-  else
-    use_transpose 12
-  end
-  play (get :chrd)[0]
+  bt, ch = sync :beat
+  bass_octave_odd_beat ch, bt
 end
 
 
@@ -51,6 +44,18 @@ define :bass_octave_double_beat do | ch, am=1, sy=:beep |
   sleep 0.5
   use_transpose 12
   play ch[0], release:0.2, amp: am
+end
+
+# octave on odd beat
+define :bass_octave_odd_beat do | ch, bt, am=1, sy=:beep |
+  use_synth sy
+  use_octave -2
+  if (bt % 2) == 0
+    use_transpose 0
+  else
+    use_transpose 12
+  end
+  play ch[0]
 end
 
 
