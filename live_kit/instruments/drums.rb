@@ -12,11 +12,26 @@ live_loop :cymbals do
 end
 
 live_loop :drums do
-  sync :bar
-  drums_bass_disco_beat
+  bt = (sync :beat)[0]
+  drums_house_odd_snare bt
 end
 
 
+
+# ---- ---- drums + cymbals
+
+# ---- sync :beat
+
+# open hi hat on half beat, snare on 2 and 4
+define :drums_house_odd_snare do | bt, am=1|
+  if (bt % 2) == 0
+    sample :drum_heavy_kick, amp: am
+  else
+    sample :drum_snare_hard, amp: am
+  end
+  sleep 0.5
+  sample :drum_cymbal_pedal, amp: am
+end
 
 # ---- ---- cymbals
 
