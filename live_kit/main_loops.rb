@@ -37,4 +37,5 @@ live_loop :movement_phases do
     i_bar = (sync :bar)[0]
   end
   set :chords, (get :phases)[i_phase % (get :phases).length()]
+  cue :phase_changed, i_phase
 end
