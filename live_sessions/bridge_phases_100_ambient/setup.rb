@@ -17,5 +17,3 @@ bridge_chords = [
 
 set :phases, [base_chords, bridge_chords]
 set :chords, (get :phases)[0]
-
-cue :start
