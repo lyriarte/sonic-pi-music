@@ -39,11 +39,11 @@ end
 define :bass_octave_double_beat do | ch, am=1, sy=:beep |
   use_synth sy
   use_octave -2
-  use_transpose 0
   play ch[0], release:0.2, amp: am
   sleep 0.5
-  use_transpose 12
-  play ch[0], release:0.2, amp: am
+  with_transpose 12 do
+    play ch[0], release:0.2, amp: am
+  end
 end
 
 # octave on odd beat
