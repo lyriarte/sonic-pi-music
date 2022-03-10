@@ -4,6 +4,8 @@ set :bpm, 160
 set :beats, 4
 set :sub_beat, 2
 
+set :start_beats, true
+
 set :chords, [
   (chord :C, :minor7),  (chord :C, :minor7),
   (chord :F, :minor7),  (chord :F, :minor7),

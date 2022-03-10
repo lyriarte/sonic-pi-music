@@ -12,9 +12,11 @@ i_beat = 0
 set :n_bar, 0
 
 live_loop :bar_beats do
-  (get :beats).times do
-    sample :drum_cymbal_closed
-    sleep 1
+  if get :start_beats
+    (get :beats).times do
+      sample :drum_cymbal_closed
+      sleep 1
+    end
   end
   while true do
     set :chrd, (get :chords).tick
