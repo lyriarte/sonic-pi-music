@@ -11,8 +11,14 @@ live_loop :keys do
   play ch, amp: 0.5
 #  with_synth :dark_ambience do
 #    play ch, amp: 0.8, attack: 0.5, decay: 0.25, sustain: (get :beats), release: (get :beats)
+#    play rrand(ch[0],ch[0]+12), amp: 2, attack: 0.5, decay: 0.25, sustain: (get :beats), release: (get :beats)
 #  end
 #  keys_rnd_dbl_sub_beat ch, (get :sub_beat)
+end
+
+live_loop :sounds do
+  bt, ch = (sync :bar)
+#  sample :ambi_haunted_hum, decay: 0.5, finish: 0.8
 end
 
 
