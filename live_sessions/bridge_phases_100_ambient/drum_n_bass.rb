@@ -50,23 +50,27 @@ end
 
 # octave 2 notes per beat
 define :bass_octave_double_beat do | ch, am=1, sy=:beep |
-  use_synth sy
-  use_octave -2
-  play ch[0], release:0.2, amp: am
-  sleep 0.5
-  with_transpose 12 do
-    play ch[0], release:0.2, amp: am
+  with_synth sy do
+    with_octave -2 do
+      play ch[0], release:0.2, amp: am
+      sleep 0.5
+      with_transpose 12 do
+        play ch[0], release:0.2, amp: am
+      end
+    end
   end
 end
 
 # base bass beat, 4 beats per bar
 define :bass_base_beat do | ch, nb=4, am=1, sy=:beep |
-  use_synth sy
-  use_octave -2
-  play ch[0], amp: am
-  sleep 1.5
-  play ch[0], amp: am
-  sleep 0.5
-  play ch[0], amp: am
+  with_synth sy do
+    with_octave -2 do
+      play ch[0], amp: am
+      sleep 1.5
+      play ch[0], amp: am
+      sleep 0.5
+      play ch[0], amp: am
+    end
+  end
 end
 

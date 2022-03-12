@@ -26,18 +26,20 @@ end
 
 # short chord odd sub beat
 define :keys_chords_odd_sub_beat do | ch, am=1, sy=:beep |
-  use_synth sy
-  sleep 0.5
-  play ch, amp: am, release: 0.1
+  with_synth sy do
+    sleep 0.5
+    play ch, amp: am, release: 0.1
+  end
 end
 
 # short double sub random
 define :keys_rnd_dbl_sub_beat do | ch, sb=4, am=1, sy=:beep |
-  use_synth sy
-  play ch.choose, release: 0.05
-  (2*sb - 1).times do
-    sleep 1/Float(2*sb)
-    play ch.choose, release:0.05, amp: am
+  with_synth sy do
+    play ch.choose, release: 0.05
+    (2*sb - 1).times do
+      sleep 1/Float(2*sb)
+      play ch.choose, release:0.05, amp: am
+    end
   end
 end
 
