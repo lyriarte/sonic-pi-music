@@ -3,10 +3,27 @@
 # ---- midi chord
 
 set :midi_chrd, []
+set :midi_hold, false
+# default to beep synth
+set :midi_synth, :beep
+set :midi_amp, 1
+set :midi_attack, 0
+set :midi_decay, 0
+set :midi_sustain, 0
+set :midi_release, 1
+
+
 
 live_loop :play_midi_chord do
+  use_synth (get :midi_synth)
   ch, on = sync :midi_changed
-  play_chord ch if on
+  if on or (get :midi_hold)
+    play ch, amp: (get :midi_amp), 
+      attack: (get :midi_attack), 
+      decay: (get :midi_decay), 
+      sustain: (get :midi_sustain), 
+      release: (get :midi_release)
+  end
 end
 
 
