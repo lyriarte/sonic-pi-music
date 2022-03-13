@@ -19,7 +19,11 @@ live_loop :bar_beats do
     end
   end
   while true do
-    set :chrd, (get :chords).tick
+    if get :use_midi_chord
+      set :chrd, (get :midi_chrd)
+    else
+      set :chrd, (get :chords).tick
+    end
     cue :bar, i_bar, (get :chrd)
     (get :beats).times do
       cue :beat, i_beat, (get :chrd)
