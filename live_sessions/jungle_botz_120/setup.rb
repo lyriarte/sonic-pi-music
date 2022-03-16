@@ -6,6 +6,13 @@ set :sub_beat, 4
 
 
 set :phases, [
-  [(chord :E, :maj),  (chord :E, :dom7)].ring
+  [
+    (chord :E, :minor7),  (chord :E, :minor7),
+    (chord :G3, :maj),  (chord :A3, :dom7)
+  ].ring,
+  [
+    (chord :B, :minor7),  (chord :B, :minor7)
+  ].ring
 ]
 set :chords, (get :phases)[0]
+
