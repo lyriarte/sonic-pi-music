@@ -111,3 +111,22 @@ define :bass_latin_beat_4 do | ch, am=1, sy=:beep |
   end
 end
 
+# random delay, root chord on first beat
+define :bass_root_rnd do | ch, nb=4, am=1, sy=:beep |
+  with_synth sy do
+    with_octave -2 do
+      play ch[0], release:0.2, amp: 1.5 * am
+      beat_left = nb 
+      loop do
+        beat_delay = choose([0.5,1,1.5,2])
+        beat_left = beat_left - beat_delay
+        if beat_left <= 0
+          break
+        end
+        sleep beat_delay
+        play ch.pick, release:0.2, amp: 1.5 * am
+      end
+    end
+  end
+end
+
