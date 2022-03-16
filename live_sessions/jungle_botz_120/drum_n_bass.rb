@@ -6,6 +6,7 @@ use_bpm get(:bpm)
 
 live_loop :bass do
   bt, ch = (sync :beat)
+#  bass_root_rnd ch
 #  bass_rnd_double_beat ch
 #  bass_octave_double_beat ch
 #  br, ch = (sync :bar)
@@ -65,7 +66,7 @@ end
 # ---- ---- ---- ---- bass
 
 # random chord 2 notes per beat
-define :bass_rnd_double_beat do | ch, am=1, sy=:beep |
+define :bass_rnd_double_beat do | ch, am=1, sy=:chipbass |
   with_synth sy do
     with_octave -2 do
       play choose(ch), release:0.2, amp: am
@@ -76,13 +77,32 @@ define :bass_rnd_double_beat do | ch, am=1, sy=:beep |
 end
 
 # octave 2 notes per beat
-define :bass_octave_double_beat do | ch, am=1, sy=:beep |
+define :bass_octave_double_beat do | ch, am=1, sy=:chipbass |
   with_synth sy do
     with_octave -2 do
       play ch[0], release:0.2, amp: am
       sleep 0.5
       with_transpose 12 do
         play ch[0], release:0.2, amp: am
+      end
+    end
+  end
+end
+
+# random delay, root chord on first beat
+define :bass_root_rnd do | ch, nb=4, am=1, sy=:chipbass |
+  with_synth sy do
+    with_octave -2 do
+      play ch[0], release:0.2, amp: 1.5 * am
+      beat_left = nb 
+      loop do
+        beat_delay = choose([0.5,1,1.5,2])
+        beat_left = beat_left - beat_delay
+        if beat_left <= 0
+          break
+        end
+        sleep beat_delay
+        play ch.pick, release:0.2, amp: 1.5 * am
       end
     end
   end
