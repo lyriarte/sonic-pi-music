@@ -63,6 +63,16 @@ define :keys_chords_bar do | ch, nb=4, am=1, sy=:beep |
   end
 end
 
+# bar slide 
+define :keys_rnd_bar_slide do | ch, nb=4, am=1, sy=:beep |
+  with_synth sy do
+    n0 = ch.choose()
+    n1 = ch.choose()
+    p0 = play n0, note_slide: nb, release: nb, amp: am
+    control p0, note: n1
+  end
+end
+
 # slide within random notes in the current chord
 define :bar_slide do | ch, nb=4, am=1, sy=:beep |
   with_synth sy do
