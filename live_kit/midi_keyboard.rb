@@ -39,9 +39,13 @@ live_loop :midi_note_on do
   nt, vl = sync "/midi:midi_through_port-0:0:1/note_on"
   ch = (get :midi_chrd).dup
   ch.append(nt)
-  play_midi_chord ch
   set :midi_chrd, ch
-  if (get :midi_hold)
+  if get :use_midi_chord
+    set :chrd, ch
+  else
+    play_midi_chord ch
+  end
+  if get :midi_hold
     cue :midi_changed, ch, true
   end
 end
