@@ -26,6 +26,7 @@ live_loop :bar_beats do
     end
     cue :bar, i_bar, (get :chrd)
     (get :beats).times do
+      set :chrd, (get :midi_chrd) if get :use_midi_chord
       cue :beat, i_beat, (get :chrd)
       sleep 1
       i_beat = (i_beat + 1) % (get :beats)

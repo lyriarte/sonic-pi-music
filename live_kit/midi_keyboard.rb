@@ -28,7 +28,8 @@ live_loop :midi_chord_loop do
   use_real_time
   use_synth (get :midi_synth)
   ch, on = sync :midi_changed
-  play_midi_chord ch if (get :midi_hold)
+  set :chrd, ch if get :use_midi_chord
+  play_midi_chord ch if get :midi_hold
 end
 
 
