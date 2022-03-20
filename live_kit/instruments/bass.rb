@@ -43,10 +43,10 @@ end
 define :bass_octave_double_beat do | ch, am=1, sy=:beep |
   with_synth sy do
     with_octave -2 do
-      play ch[0], release:0.2, amp: am
+      play ch[0], release:0.2, amp: am, pan: -0.8
       sleep 0.5
       with_transpose 12 do
-        play ch[0], release:0.2, amp: am
+        play ch[0], release:0.2, amp: am, pan: 0.8
       end
     end
   end
@@ -57,10 +57,10 @@ define :bass_octave_odd_beat do | ch, bt, am=1, sy=:beep |
   with_synth sy do
     with_octave -2 do
       if (bt % 2) == 0
-        play ch[0], release:0.2, amp: am
+        play ch[0], release:0.2, amp: am, pan: -0.8
       else
         with_transpose 12 do
-          play ch[0], release:0.2, amp: am
+          play ch[0], release:0.2, amp: am, pan: 0.8
         end
       end
     end

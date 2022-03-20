@@ -52,7 +52,7 @@ define :keys_rnd_dbl_sub_beat do | ch, sb=4, am=1, sy=:beep |
     play ch.choose, release: 0.05
     (2*sb - 1).times do
       sleep 1/Float(2*sb)
-      play ch.choose, release:0.05, amp: am
+      play ch.choose, release:0.05, amp: am, pan: (rrand -1, 1)
     end
   end
 end

@@ -15,7 +15,7 @@ end
 
 live_loop :sounds do
 #  bt, ch = (sync :beat)
-#  sample :ambi_haunted_hum, rate: (rrand -2, 2), beat_stretch: (rrand 1, (get :beats) * 2) 
+#  sample :ambi_haunted_hum, rate: (rrand -2, 2), beat_stretch: (rrand 1, (get :beats) * 2), pan: (rrand -1, 1) 
   br, ch = (sync :bar)
 #  keys_dark_ambi_rnd_chord ch
 end
@@ -37,7 +37,7 @@ define :keys_rnd_dbl_sub_beat do | ch, sb=4, am=1, sy=:beep |
     play ch.choose, release: 0.05
     (2*sb - 1).times do
       sleep 1/Float(2*sb)
-      play ch.choose, release:0.05, amp: am
+      play ch.choose, release:0.05, amp: am, pan: (rrand -1, 1)
     end
   end
 end
@@ -53,7 +53,7 @@ define :keys_rnd_penta_bells do | ch, am=1 |
     i=1
     while i>0.05 do 
       j = rrand(0, i, step: 0.05)
-        play (scale ch[0], :minor_pentatonic).pick
+        play (scale ch[0], :minor_pentatonic).pick , amp: am, pan: 2*i-1
         sleep(j)
         i=i-j
     end
@@ -66,7 +66,7 @@ end
 define :keys_dark_ambi_rnd_chord do | ch, am=1, sy=:dark_ambience |
   with_synth sy do
     play ch, amp: am, attack: 0.5, decay: 0.25, release: (get :beats)*2
-    play (rrand ch[0], ch[0]+12, step: 1), amp: am, attack: 2, decay: 0.25, release: (get :beats)*1.5
+    play (rrand ch[0], ch[0]+12, step: 1), amp: am, attack: 2, decay: 0.25, release: (get :beats)*1.5, pan: (rrand -1, 1)
   end
 end
 

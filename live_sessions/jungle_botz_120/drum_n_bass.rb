@@ -80,10 +80,10 @@ end
 define :bass_octave_double_beat do | ch, am=1, sy=:chipbass |
   with_synth sy do
     with_octave -2 do
-      play ch[0], release:0.2, amp: am
+      play ch[0], release:0.2, amp: am, pan: -0.8
       sleep 0.5
       with_transpose 12 do
-        play ch[0], release:0.2, amp: am
+        play ch[0], release:0.2, amp: am, pan: 0.8
       end
     end
   end
