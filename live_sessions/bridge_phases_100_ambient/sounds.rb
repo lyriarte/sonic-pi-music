@@ -3,19 +3,25 @@
 sync :start
 use_bpm get(:bpm)
 
-live_loop :keys do
-#  bt, ch = (sync :beat)
+live_loop :keys_beat do
+  bt, ch = (sync :beat)
 #  keys_chords_odd_sub_beat ch, am=0.5
 #  keys_rnd_dbl_sub_beat ch, (get :sub_beat) if one_in 2
+end
+
+live_loop :keys_bar do
   br, ch = (sync :bar)
   play ch, amp: 0.5
 #  keys_rnd_penta_bells ch, am=0.5
 #  keys_rnd_dbl_sub_beat ch, (get :sub_beat)
 end
 
-live_loop :sounds do
-#  bt, ch = (sync :beat)
+live_loop :sounds_beat do
+  bt, ch = (sync :beat)
 #  sample :ambi_haunted_hum, rate: (rrand -2, 2), beat_stretch: (rrand 1, (get :beats) * 2), pan: (rrand -1, 1) 
+end
+
+live_loop :sounds_bar do
   br, ch = (sync :bar)
 #  keys_dark_ambi_rnd_chord ch
 end

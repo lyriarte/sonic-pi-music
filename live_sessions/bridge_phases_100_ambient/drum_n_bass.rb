@@ -1,26 +1,28 @@
 # ---- drum n bass
 
-sync :start
+#sync :start
 use_bpm get(:bpm)
 
 
-live_loop :bass do
-#  bt, ch = (sync :beat)
+live_loop :bass_beat do
+  bt, ch = (sync :beat)
 #  bass_octave_double_beat ch
+end
+
+live_loop :bass_bar do
   br, ch = (sync :bar)
   bass_base_beat ch
 end
 
-live_loop :cymbals do
+live_loop :cymbals_beat do
   bt, ch = sync :beat
   sample :drum_cymbal_closed, amp: 0.5
 #  drums_cymbals_sub_beat (get :sub_beat)
 end
 
-live_loop :drums do
+live_loop :drums_beat do
   bt, ch = sync :beat
 #  drums_house_odd_snare bt
-#  br, ch = sync :bar
 end
 
 

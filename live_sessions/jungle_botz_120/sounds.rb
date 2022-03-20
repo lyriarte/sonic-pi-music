@@ -3,10 +3,14 @@
 sync :start
 use_bpm get(:bpm)
 
-live_loop :keys do
+live_loop :keys_beat do
   use_synth :dpulse
-#  bt, ch = (sync :beat)
+  bt, ch = (sync :beat)
 #  keys_chords_odd_sub_beat ch, am=1
+end
+
+live_loop :keys_bar do
+  use_synth :dpulse
   br, ch = (sync :bar)
 #  n = rrand_i(1, (get :beats))
 #  ((get :beats) / n).times do
@@ -18,10 +22,13 @@ live_loop :keys do
   end
 end
 
-live_loop :sounds do
+live_loop :sounds_beat do
   bt, ch = (sync :beat)
   sample (choose [:mehackit_robot1, :mehackit_robot3, :mehackit_robot5]), amp: 2 if one_in(30)
-#  br, ch = (sync :bar)
+end
+
+live_loop :sounds_bar do
+  br, ch = (sync :bar)
 #  keys_rnd_dbl_sub_beat ch
 end
 

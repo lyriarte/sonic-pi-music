@@ -4,24 +4,26 @@ sync :start
 use_bpm get(:bpm)
 
 
-live_loop :bass do
+live_loop :bass_beat do
   bt, ch = (sync :beat)
 #  bass_root_rnd ch
 #  bass_rnd_double_beat ch
 #  bass_octave_double_beat ch
-#  br, ch = (sync :bar)
 end
 
-live_loop :cymbals do
+live_loop :cymbals_beat do
   bt, ch = sync :beat
 #  sample :drum_cymbal_closed, amp: 0.5
 #  drums_cymbals_sub_beat (get :sub_beat)
 end
 
-live_loop :drums do
+live_loop :drums_beat do
   bt, ch = sync :beat
   sample :drum_bass_hard, amp: 0.5
-#  br, ch = sync :bar
+end
+
+live_loop :drums_bar do
+  br, ch = sync :bar
 #  drums_jungle_beat_4
 end
 
