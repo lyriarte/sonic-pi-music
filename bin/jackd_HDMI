@@ -1,0 +1,1 @@
+screen -S jackd_HDMI -dm jackd -d alsa -d hw:HDMI
