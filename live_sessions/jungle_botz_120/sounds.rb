@@ -6,7 +6,8 @@ use_bpm get(:bpm)
 live_loop :keys_beat do
   use_synth :dpulse
   bt, ch = (sync :beat)
-#  keys_chords_odd_sub_beat ch, am=1
+#  keys_chords_odd_sub_beat ch, am=4
+#  keys_rnd_dbl_sub_beat ch, sb=4 if one_in(2)
 end
 
 live_loop :keys_bar do
@@ -14,7 +15,7 @@ live_loop :keys_bar do
   br, ch = (sync :bar)
 #  n = rrand_i(1, (get :beats))
 #  ((get :beats) / n).times do
-#    keys_rnd_bar_slide ch, nb=n, am=1
+#    keys_rnd_bar_slide ch, nb=n, am=1, sy=:dpulse
 #    sleep n/2
 #  end
   with_fx :ixi_techno do
@@ -24,7 +25,7 @@ end
 
 live_loop :sounds_beat do
   bt, ch = (sync :beat)
-  sample (choose [:mehackit_robot1, :mehackit_robot3, :mehackit_robot5]), amp: 2 if one_in(30)
+  sample (choose [:mehackit_robot1, :mehackit_robot3, :mehackit_robot5]), amp: 2 if one_in(20)
 end
 
 live_loop :sounds_bar do
