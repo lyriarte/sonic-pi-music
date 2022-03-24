@@ -1,28 +1,28 @@
 # ---- drum n bass
 
-#sync :start
+sync :start
 use_bpm get(:bpm)
 
 
 live_loop :bass_beat do
   bt, ch = (sync :beat)
-#  bass_octave_double_beat ch
+  bass_octave_double_beat ch if (get :n_bar).between?(16,31)
 end
 
 live_loop :bass_bar do
   br, ch = (sync :bar)
-  bass_base_beat ch
+  bass_base_beat ch if (get :n_bar) < 16 or (get :n_bar) >= 64
 end
 
 live_loop :cymbals_beat do
   bt, ch = sync :beat
-  sample :drum_cymbal_closed, amp: 0.5
-#  drums_cymbals_sub_beat (get :sub_beat)
+  sample :drum_cymbal_closed, amp: 0.5 if (get :n_bar) < 24
+  drums_cymbals_sub_beat (get :sub_beat) if (get :n_bar) >= 24
 end
 
 live_loop :drums_beat do
   bt, ch = sync :beat
-#  drums_house_odd_snare bt
+  drums_house_odd_snare bt if (get :n_bar) >= 28
 end
 
 
