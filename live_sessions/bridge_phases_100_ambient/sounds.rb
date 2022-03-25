@@ -5,25 +5,25 @@ use_bpm get(:bpm)
 
 live_loop :keys_beat do
   bt, ch = (sync :beat)
-  keys_chords_odd_sub_beat ch, am=0.5 if (get :n_bar).between?(20,63)
-  keys_rnd_dbl_sub_beat ch, (get :sub_beat) if (get :n_bar).between?(48,63) and one_in 2
+  keys_chords_odd_sub_beat ch, am=0.5 if (get :play_chords_odd) # (get :n_bar).between?(20,63)
+  keys_rnd_dbl_sub_beat ch, (get :sub_beat) if (get :play_chords_rnd) # (get :n_bar).between?(48,63) and one_in 2
 end
 
 live_loop :keys_bar do
   br, ch = (sync :bar)
-  play ch, amp: 0.5 if (get :n_bar) < 32
-  keys_rnd_penta_bells ch, am=0.5 if (get :n_bar).between?(72,95) 
-  keys_rnd_dbl_sub_beat ch, (get :sub_beat) if (get :n_bar).between?(16,31) 
+  play ch, amp: 0.5 if (get :play_chords_beat) # (get :n_bar) < 32
+  keys_rnd_penta_bells ch, am=0.5 if (get :play_bells_rnd) # (get :n_bar).between?(72,95) 
+  keys_rnd_dbl_sub_beat ch, (get :sub_beat) if (get :play_chords_rnd_beat) # (get :n_bar).between?(16,31) 
 end
 
 live_loop :sounds_beat do
   bt, ch = (sync :beat)
-  sample :ambi_haunted_hum, rate: (rrand -2, 2), beat_stretch: (rrand 1, (get :beats) * 2), pan: (rrand -1, 1) if (get :n_bar) >= 84 
+  sample :ambi_haunted_hum, rate: (rrand -2, 2), beat_stretch: (rrand 1, (get :beats) * 2), pan: (rrand -1, 1) if (get :play_haunted) # (get :n_bar) >= 84 
 end
 
 live_loop :sounds_bar do
   br, ch = (sync :bar)
-  keys_dark_ambi_rnd_chord ch if (get :n_bar).between?(68,80) 
+  keys_dark_ambi_rnd_chord ch if (get :play_ambient) # (get :n_bar).between?(68,80) 
 end
 
 
