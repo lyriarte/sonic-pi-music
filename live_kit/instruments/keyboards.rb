@@ -107,3 +107,19 @@ define :keys_latin_2_bar_4 do | ch, br, am=1, sy=:fm |
     end
   end
 end
+
+# acid house pattern
+define :keys_bar_house do | ch, nb=4, am=1, sy=:dpulse |
+  with_synth sy do
+    [0,0.25,0.25,0.25,0.25,0.25].each do | i |
+      sleep i
+      play_chord ch, release: 0.2
+    end
+    sleep 0.25
+    play_chord ch, release: 2, decay: 0.5
+    [2,0.25,0.25].each do | i |
+      sleep i
+      play_chord ch, release: 0.2
+    end
+  end
+end
