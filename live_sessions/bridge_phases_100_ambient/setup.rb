@@ -1,5 +1,7 @@
 #  bridge phases ambient 100 bpm setup
 
+# https://soundcloud.com/m_u_l_e/ambient-100-20220322
+
 set :bpm, 100
 set :beats, 4
 set :sub_beat, 4

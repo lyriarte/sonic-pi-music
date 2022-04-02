@@ -1,5 +1,7 @@
 #  jungle beat botz sounds 120 bpm setup
 
+# https://soundcloud.com/m_u_l_e/junglebotz-120-20220322
+
 set :bpm, 120
 set :beats, 4
 set :sub_beat, 4
