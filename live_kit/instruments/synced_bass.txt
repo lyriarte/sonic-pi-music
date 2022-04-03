@@ -1,0 +1,15 @@
+use_synth :subpulse
+
+live_loop :bass_line do
+  sync "/bar"
+  sample :bass_hit_c
+  play :c1
+  sleep 1
+  play :g1
+  sleep 1
+  sample :bass_voxy_hit_c
+  play :a1
+  sleep 1
+  sample :guit_e_slide
+  play :c2
+end

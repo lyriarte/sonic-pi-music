@@ -1,0 +1,32 @@
+set :bpm, 120
+use_bpm get(:bpm)
+
+set :drum_pattern, (ring
+                    :drum_heavy_kick,
+                    :drum_cymbal_closed,
+                    
+                    # ( :drum_cymbal_closed, :drum_snare_soft ),
+                    :drum_cymbal_closed,
+                    :drum_cymbal_closed
+                    )
+
+
+
+live_loop :bar do   #|drum_pattern|
+  cue "/bar"
+  
+  drums_bar = get :drum_pattern
+  beats = drums_bar.length
+  
+  beats.times do
+    cue "/bar/beat"
+    sample drums_bar[tick]
+    
+    # (get :sub_beats).times do
+    #   cue "/bar/beat/sub_beat"
+    #   sleep 1/get(:sub_beats)
+    # end
+    sleep 1
+  end
+  
+end
