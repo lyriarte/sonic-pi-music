@@ -37,6 +37,7 @@ end
 
 live_loop :midi_note_on do
   use_real_time
+  use_synth (get :midi_synth)
   nt, vl = sync "/midi:midi_through_port-0:0:1/note_on"
   if (get :play_flags_keymap) and nt < (get :play_flags_keymap).length() then
     set (get :play_flags_keymap)[nt], (not get (get :play_flags_keymap)[nt])
