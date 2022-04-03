@@ -3,6 +3,21 @@
 set :start_beats, nil
 set :use_midi_chord, nil
 
+set :play_flags_keymap, [
+  :play_bass_octave,     # C1
+  :play_bass_base,
+  :play_cymbal_beat,     # D1
+  :play_cymbal_sub,
+  :play_drums_house,     # E1
+  :play_chords_odd,      # F1
+  :play_chords_rnd,
+  :play_chords_beat,     # G1
+  :play_bells_rnd,
+  :play_chords_rnd_beat, # A1
+  :play_haunted,
+  :play_ambient          # B1
+]
+
 cue :phase, 0
 cue :start
 
