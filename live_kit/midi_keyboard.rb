@@ -38,16 +38,20 @@ end
 live_loop :midi_note_on do
   use_real_time
   nt, vl = sync "/midi:midi_through_port-0:0:1/note_on"
-  ch = (get :midi_chrd).dup
-  ch.append(nt)
-  set :midi_chrd, ch
-  if get :use_midi_chord
-    set :chrd, ch
+  if (get :play_flags_keymap) and nt < (get :play_flags_keymap).length() then
+    set (get :play_flags_keymap)[nt], (not get (get :play_flags_keymap)[nt])
   else
-    play_midi_chord ch
-  end
-  if get :midi_hold
-    cue :midi_changed, ch, true
+    ch = (get :midi_chrd).dup
+    ch.append(nt)
+    set :midi_chrd, ch
+    if get :use_midi_chord
+      set :chrd, ch
+    else
+      play_midi_chord ch
+    end
+    if get :midi_hold
+      cue :midi_changed, ch, true
+    end
   end
 end
 
