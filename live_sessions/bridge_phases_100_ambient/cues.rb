@@ -3,6 +3,7 @@
 set :start_beats, nil
 set :use_midi_chord, nil
 
+=begin
 set :play_flags_keymap, [
   :play_bass_octave,     # C1
   :play_bass_base,
@@ -17,6 +18,7 @@ set :play_flags_keymap, [
   :play_haunted,
   :play_ambient          # B1
 ]
+=end
 
 cue :phase, 0
 cue :start
