@@ -3,6 +3,7 @@
 set :start_beats, nil
 set :use_midi_chord, nil
 
+# uncomment the keymap to toggle play flags with midi keyboard lower notes
 =begin
 set :play_flags_keymap, [
   :play_bass_octave,     # C1
@@ -20,11 +21,15 @@ set :play_flags_keymap, [
 ]
 =end
 
+# uncomment to clear play flags keymap
+#set :play_flags_keymap, nil
+
 cue :phase, 0
 cue :start
 
 live_loop :cues do
   br, ch = (sync :bar)
+  # toggle play flags according to total bars count if there is no keymap
   if not get :play_flags_keymap then
     set :play_bass_octave, nil
     set :play_bass_octave, true if (get :n_bar).between?(16,31)
