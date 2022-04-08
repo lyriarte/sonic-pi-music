@@ -5,10 +5,20 @@
 
 set :midi_synth, :beep
 set :midi_amp, 1
+ct_amp = 7
+range_amp = [0,4]
 set :midi_attack, 0
+ct_attack = 74
+range_attack = [0,2]
 set :midi_decay, 0
+ct_decay = 71
+range_decay = [0,4]
 set :midi_sustain, 0
+ct_sustain = 73
+range_sustain = [0,4]
 set :midi_release, 1
+ct_release = 72
+range_release = [0.2,8]
 
 
 # ---- midi chord
@@ -58,4 +68,27 @@ live_loop :midi_note_off do
   ch = (get :midi_chrd).dup
   ch.delete(nt)
   set :midi_chrd, ch
+end
+
+
+define :control_ponderation do | rg, va |
+  return rg[0] + (va / Float(127)) * (rg[1] - rg[0])
+end
+
+live_loop :midi_control_change do
+  use_real_time
+  # sync ctrl event
+  ct, va = sync "/midi:midi_through_port-0:0:1/control_change"
+  case ct
+  when ct_amp
+    set :midi_amp, (control_ponderation range_amp, va)
+  when ct_attack
+    set :midi_attack, (control_ponderation range_attack, va)
+  when ct_decay
+    set :midi_decay, (control_ponderation range_decay, va)
+  when ct_sustain
+    set :midi_sustain, (control_ponderation range_sustain, va)
+  when ct_release
+    set :midi_release, (control_ponderation range_release, va)
+  end
 end
