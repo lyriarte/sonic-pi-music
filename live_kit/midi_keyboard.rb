@@ -3,7 +3,7 @@
 
 # ---- midi synth default to beep synth
 
-set :midi_synth, :beep
+set :midi_synth, :mod_beep
 set :midi_amp, 1
 ct_amp = 7
 range_amp = [0,4]
@@ -19,6 +19,10 @@ range_sustain = [0,4]
 set :midi_release, 1
 ct_release = 72
 range_release = [0.2,8]
+set :midi_mod_range, 0
+ct_mod_range = 1
+range_mod_range = [0,12]
+set :midi_mod_phase, 0.25
 
 
 # ---- midi chord
@@ -30,7 +34,9 @@ define :play_midi_chord do | ch |
     attack: (get :midi_attack), 
     decay: (get :midi_decay), 
     sustain: (get :midi_sustain), 
-    release: (get :midi_release)
+    release: (get :midi_release),
+    mod_range: (get :midi_mod_range),
+    mod_phase: (get :midi_mod_phase)
 end
 
 
@@ -90,5 +96,7 @@ live_loop :midi_control_change do
     set :midi_sustain, (control_ponderation range_sustain, va)
   when ct_release
     set :midi_release, (control_ponderation range_release, va)
+  when ct_mod_range
+    set :midi_mod_range, Integer(control_ponderation range_mod_range, va)
   end
 end
