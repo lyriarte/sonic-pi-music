@@ -100,3 +100,12 @@ live_loop :midi_control_change do
     set :midi_mod_range, Integer(control_ponderation range_mod_range, va)
   end
 end
+
+
+live_loop :midi_pich_change do
+  use_real_time
+  # sync pitch bend event
+  va = sync "/midi:midi_through_port-0:0:1/pitch_bend"
+  # default pitch bend 8K, phase 0.25, range 0..16K maps on 0 to 0.5
+  set :midi_mod_phase, [0.001, va[0] / Float(32768)].max
+end
