@@ -1,27 +1,43 @@
 #  ---- ----  ----  ---- midi keyboard input
 
 
-# ---- midi synth default to beep synth
+# ---- midi synth defaults
 
-set :midi_synth, :mod_beep
+# use beep synth if no modulation
+set :midi_synth, :beep
+# use mod beep synth if modulation range is non zero
+set :midi_mod_synth, :mod_beep
+
+# amp volume on ctrl 7, default 1, range 0 to 4
 set :midi_amp, 1
 ct_amp = 7
 range_amp = [0,4]
+
+# ADSR envelope attack on ctrl 74, default 0, range 0 to 2
 set :midi_attack, 0
 ct_attack = 74
 range_attack = [0,2]
+
+# ADSR envelope decay on ctrl 71, default 0, range 0 to 4
 set :midi_decay, 0
 ct_decay = 71
 range_decay = [0,4]
+
+# ADSR envelope sustain on ctrl 73, default 0, range 0 to 4
 set :midi_sustain, 0
 ct_sustain = 73
 range_sustain = [0,4]
+
+# ADSR envelope release on ctrl 72, default 1, range 0.2 to 8
 set :midi_release, 1
 ct_release = 72
 range_release = [0.2,8]
+
+# modulation on ctrl 1, default 0 (no modulation), range 0 to 12 (octave)
 set :midi_mod_range, 0
 ct_mod_range = 1
 range_mod_range = [0,12]
+# modulation phase on pitch bend, default 0.25, range 0.001 to 0.5
 set :midi_mod_phase, 0.25
 
 
@@ -30,11 +46,19 @@ set :midi_mod_phase, 0.25
 set :midi_chrd, []
 
 define :play_midi_chord do | ch |
+  # use mod synth if nonzero range
+  if (get :midi_mod_range) > 0
+    use_synth (get :midi_mod_synth)
+  else
+    use_synth (get :midi_synth)
+  end
+  # play chord using ADSR envelope
   play ch, amp: (get :midi_amp), 
     attack: (get :midi_attack), 
     decay: (get :midi_decay), 
     sustain: (get :midi_sustain), 
     release: (get :midi_release),
+  # modulation parameters are ignored on non mod synth
     mod_range: (get :midi_mod_range),
     mod_phase: (get :midi_mod_phase)
 end
@@ -44,7 +68,6 @@ end
 
 live_loop :midi_note_on do
   use_real_time
-  use_synth (get :midi_synth)
   # sync keydown event
   nt, vl = sync "/midi:midi_through_port-0:0:1/note_on"
   # if lower notes are used as flags in a keymap 
@@ -77,6 +100,7 @@ live_loop :midi_note_off do
 end
 
 
+# map 7 bit midi control value va on range rg
 define :control_ponderation do | rg, va |
   return rg[0] + (va / Float(127)) * (rg[1] - rg[0])
 end
