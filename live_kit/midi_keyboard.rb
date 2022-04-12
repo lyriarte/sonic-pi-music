@@ -45,15 +45,15 @@ set :midi_mod_phase, 0.25
 
 set :midi_chrd, []
 
-define :play_midi_chord do | ch |
+define :play_midi_note do | nt |
   # use mod synth if nonzero range
   if (get :midi_mod_range) > 0
     use_synth (get :midi_mod_synth)
   else
     use_synth (get :midi_synth)
   end
-  # play chord using ADSR envelope
-  play ch, amp: (get :midi_amp), 
+  # play note using ADSR envelope
+  play nt, amp: (get :midi_amp), 
     attack: (get :midi_attack), 
     decay: (get :midi_decay), 
     sustain: (get :midi_sustain), 
@@ -74,18 +74,14 @@ live_loop :midi_note_on do
   if (get :play_flags_keymap) and nt < (get :play_flags_keymap).length() then
     # toggle flag in the keymap indexed by the midi note
     set (get :play_flags_keymap)[nt], (not get (get :play_flags_keymap)[nt])
-  # otherwise add the note to the global midi chord
+  # otherwise play the note and add to the global midi chord
   else
+    # play the note now unless overriding the chord progression
+    play_midi_note nt unless get :use_midi_chord
+    # add note to the current midi chord
     ch = (get :midi_chrd).dup
     ch.append(nt)
-    set :midi_chrd, ch
-    # if overriding chord progression, set midi chord as current chord
-    if get :use_midi_chord
-      set :chrd, ch
-    # otherwise play midi chord
-    else
-      play_midi_chord ch
-    end
+    set :midi_chrd, ch.sort
   end
 end
 
@@ -96,7 +92,7 @@ live_loop :midi_note_off do
   # remove note from the current midi chord
   ch = (get :midi_chrd).dup
   ch.delete(nt)
-  set :midi_chrd, ch
+  set :midi_chrd, ch.sort
 end
 
 
