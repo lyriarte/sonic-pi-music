@@ -6,25 +6,25 @@ use_bpm get(:bpm)
 
 live_loop :bass_beat do
   bt, ch = (sync :beat)
-#  bass_root_rnd ch
-#  bass_rnd_double_beat ch
-#  bass_octave_double_beat ch
+  bass_root_rnd ch if (get :play_bass_root)
+  bass_rnd_double_beat ch if (get :play_bass_rnd)
+  bass_octave_double_beat ch if (get :play_bass_octave)
 end
 
 live_loop :cymbals_beat do
   bt, ch = sync :beat
-#  sample :drum_cymbal_closed, amp: 0.5
-#  drums_cymbals_sub_beat (get :sub_beat)
+  sample :drum_cymbal_closed, amp: 0.5 if (get :play_cymbal_beat)
+  drums_cymbals_sub_beat (get :sub_beat) if (get :play_cymbal_sub)
 end
 
 live_loop :drums_beat do
   bt, ch = sync :beat
-  sample :drum_bass_hard, amp: 0.5
+  sample :drum_bass_hard, amp: 0.5 if (get :play_drums_bass)
 end
 
 live_loop :drums_bar do
   br, ch = sync :bar
-#  drums_jungle_beat_4
+  drums_jungle_beat_4 if (get :play_drums_jungle)
 end
 
 
