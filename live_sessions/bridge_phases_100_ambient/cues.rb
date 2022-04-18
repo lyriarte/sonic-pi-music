@@ -3,6 +3,11 @@
 set :start_beats, nil
 set :use_midi_chord, nil
 
+# default midi synths
+set :midi_synth, :pretty_bell
+# use mod triangle wave synth if modulation range is non zero
+set :midi_mod_synth, :mod_tri
+
 # keymap to toggle play flags with midi keyboard lower notes
 set :play_flags_keymap, [
   :play_bass_octave,     # C1
