@@ -11,8 +11,8 @@ set :phases, [
     [(chord :F, :minor7)] * 2 + 
     [(chord :C, :minor7)] * 2 + 
     [
-      (chord :G3, :minor7), (chord :F3, :minor7), (chord :Bb3, :maj), (chord :C, :minor7),
-      (chord :G3, :minor7), (chord :F3, :minor7), (chord :Bb3, :maj), (chord :Bb3, :maj)
+      (chord :G, :minor7), (chord :F, :minor7), (chord :Bb, :maj), (chord :C, :minor7),
+      (chord :G, :minor7), (chord :F, :minor7), (chord :Bb, :maj), (chord :Bb, :maj)
     ]
   ).ring
 ]
