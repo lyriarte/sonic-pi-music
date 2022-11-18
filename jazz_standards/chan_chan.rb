@@ -23,13 +23,17 @@ use_bpm get(:bpm)
 live_loop :keys do
   br, ch = (sync :bar)
   if br % 2 == 0 then
-    play ch, release: 1
+    with_synth :pluck do
+      play ch, release: 1
+    end
     with_octave -2 do
       play ch[0], release: 0.2
     end
     sleep 1.5
     ch = (get :chords)[br+1]
-    play ch, release: 2
+    with_synth :pluck do
+      play ch, release: 1
+    end
     with_octave -2 do
       play ch[0], release: 0.2
     end
