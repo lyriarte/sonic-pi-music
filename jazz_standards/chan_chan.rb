@@ -36,6 +36,18 @@ live_loop :keys do
   end
 end
 
+
+live_loop :cymbals_beat do
+  bt, ch = sync :beat
+  sb = (get :sub_beat)
+  sample :drum_cymbal_closed, amp: 0.25
+  (sb - 1).times do
+    sleep 1/Float(sb)
+    sample :drum_cymbal_closed, amp: 0.25
+  end
+end
+
+
 # ---- cues
 
 #cue :start
