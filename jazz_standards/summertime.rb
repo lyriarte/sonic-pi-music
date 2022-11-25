@@ -6,27 +6,21 @@ set :sub_beat, 2
 
 set :start_beats, true
 
-set :chords, [
-  (chord :D, :minor7),  (chord :A, :dom7),
-  (chord :D, :minor7),  (chord :A, :dom7),
-  (chord :D, :minor7),  (chord :A, :dom7),
-  (chord :D, :minor7),  (chord :A, :dom7),
-  
-  (chord :G, :minor7),  (chord :C, :dom7),
+set :chords, (
+ [(chord :D, :minor7),  (chord :A, :dom7)] * 4 +
+
+ [(chord :G, :minor7),  (chord :C, :dom7),
   (chord :G, :minor7),  (chord :C, :dom7),
   (chord :E, :dim7),    (chord :E, :dim7),
-  (chord :A, :dom7),    (chord :A, :dom7),
-  
-  (chord :D, :minor7),  (chord :A, :dom7),
-  (chord :D, :minor7),  (chord :A, :dom7),
-  (chord :D, :minor7),  (chord :A, :dom7),
-  (chord :D, :minor7),  (chord :A, :dom7),
-  
-  (chord :F, :major7),  (chord :Bb, :major),
+  (chord :A, :dom7),    (chord :A, :dom7)] +
+
+ [(chord :D, :minor7),  (chord :A, :dom7)] * 4 +
+
+ [(chord :F, :major7),  (chord :Bb, :major),
   (chord :E, :dim7),    (chord :A, :dom7),
   (chord :D, :minor7),  (chord :D, :minor7),
-  (chord :E, :dim7),    (chord :A, :dom7)
-].ring
+  (chord :E, :dim7),    (chord :A, :dom7)]
+).ring
 
 
 # ---- instruments
