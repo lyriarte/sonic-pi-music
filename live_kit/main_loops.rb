@@ -56,7 +56,7 @@ live_loop :movement_phases do
   i_phase = (sync :phase)[0]
   # sync current bar
   i_bar = (sync :bar)[0]
-  # up to the last bar of the chord progressiob
+  # up to the last bar of the chord progression
   while i_bar != (get :chords).length() - 1 do
     i_bar = (sync :bar)[0]
   end
