@@ -36,18 +36,58 @@ set :midi_mod_synth, :mod_tri
 
 
 # uncomment to disable play flags toggle with midi keyboard
-set :play_flags_keymap, nil
+set :play_flags_keymap, [
+  :play_bass_octave,     # C1
+  :play_bass_root,
+  :play_flag_dummy,      # D1
+  :play_cymbal_beat,     
+  :play_cymbal_sub,      # E1
+  :play_drums_bass,      # F1
+  :play_drums_house,
+  :play_chords_odd,      # G1
+  :play_flag_dummy
+]
 
-set :play_chords_odd, false
+# clear play flags
+for flag in (get :play_flags_keymap) do
+    set flag, false
+end
 
-set :play_bass_root, false
-set :play_bass_octave, true
+# play flags mappings per live loop
+play_flags_bass_offset = 0
+play_flags_bass = [
+  nil, #:play_bass_octave,     # C1
+  nil, #:play_bass_root,
+]
+play_flags_cymbal_offset = 3
+play_flags_cymbal = [
+  nil, #:play_cymbal_beat,     
+  1, #:play_cymbal_sub,      # E1
+]
+play_flags_drums_offset = 5
+play_flags_drums = [
+  1, #:play_drums_bass,      # F1
+  nil, #:play_drums_house,
+]
+play_flags_keys_offset = 7
+play_flags_keys = [
+  1, #:play_chords_odd,      # G1
+]
 
-set :play_cymbal_beat, false
-set :play_cymbal_sub, false
-set :play_drums_bass, false
-set :play_drums_house, false
+# set play flags
+for i in (0..play_flags_bass.length()-1) do
+      set (get :play_flags_keymap)[i + play_flags_bass_offset], play_flags_bass[i]
+end
+for i in (0..play_flags_cymbal.length()-1) do
+      set (get :play_flags_keymap)[i + play_flags_cymbal_offset], play_flags_cymbal[i]
+end
+for i in (0..play_flags_drums.length()-1) do
+      set (get :play_flags_keymap)[i + play_flags_drums_offset], play_flags_drums[i]
+end
+for i in (0..play_flags_keys.length()-1) do
+      set (get :play_flags_keymap)[i + play_flags_keys_offset], play_flags_keys[i]
+end
 
-cue :phase, 2
+cue :phase, 0
 cue :start
 
