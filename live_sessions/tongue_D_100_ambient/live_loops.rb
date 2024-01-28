@@ -81,3 +81,14 @@ define :bass_root_sub do | ch, sb=4, am=1, sy=:chipbass |
   end
 end
 
+
+# ---- ---- ---- ---- keys
+
+# short chord odd sub beat
+define :keys_chords_odd_sub_beat do | ch, am=1, sy=:beep |
+  with_synth sy do
+    sleep 0.5
+    play ch, amp: am, release: 0.1
+  end
+end
+
