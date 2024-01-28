@@ -18,10 +18,9 @@ set :phases, [
   (chord :G, :maj),  (chord :A, :dom7),  
   (chord :Fs, :minor7),  (chord :Fs, :minor7),
 ].ring, 
-[
-  (chord :Fs, :minor7),  (chord :Fs, :minor7),
-  (chord :Fs, :minor7),  (chord :Fs, :minor7),
-].ring, 
+(
+  [ (chord :Fs, :minor7) ] * 8
+).ring, 
 ]
 
 set :chords, (get :phases)[0]
@@ -39,16 +38,16 @@ set :midi_mod_synth, :mod_tri
 # uncomment to disable play flags toggle with midi keyboard
 set :play_flags_keymap, nil
 
-set :play_chords_odd, true
+set :play_chords_odd, false
 
 set :play_bass_root, false
-set :play_bass_octave, false
+set :play_bass_octave, true
 
 set :play_cymbal_beat, false
-set :play_cymbal_sub, true
-set :play_drums_bass, true
+set :play_cymbal_sub, false
+set :play_drums_bass, false
 set :play_drums_house, false
 
-cue :phase, 1
-#cue :start
+cue :phase, 2
+cue :start
 
