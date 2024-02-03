@@ -36,6 +36,7 @@ set :midi_mod_synth, :mod_tri
 
 # intrument synths
 set :keys_synth, :dpulse
+set :bass_synth, :chipbass
 
 # uncomment to disable play flags toggle with midi keyboard
 set :play_flags_keymap, [

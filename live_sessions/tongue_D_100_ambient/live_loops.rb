@@ -12,8 +12,8 @@ end
 
 live_loop :bass_beat do
   bt, ch = (sync :beat)
-  bass_root_sub ch if (get :play_bass_root)
-  bass_octave_double_beat ch, sb=(get :sub_beat) if (get :play_bass_octave)
+  bass_root_sub ch, sb=(get :sub_beat), am=1, sy=(get :bass_synth)  if (get :play_bass_root)
+  bass_octave_double_beat ch, am=1, sy=(get :bass_synth) if (get :play_bass_octave)
 end
 
 live_loop :cymbals_beat do
