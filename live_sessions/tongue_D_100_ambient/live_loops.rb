@@ -4,9 +4,8 @@ sync :start
 use_bpm get(:bpm)
 
 live_loop :keys_beat do
-  use_synth :dpulse
   bt, ch = (sync :beat)
-  keys_chords_odd_sub_beat ch, am=4 if (get :play_chords_odd)
+  keys_chords_odd_sub_beat ch, am=4, sy=(get :keys_synth) if (get :play_chords_odd)
 end
 
 # ---- drum n bass

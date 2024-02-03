@@ -34,6 +34,8 @@ set :midi_synth, :pretty_bell
 # use mod triangle wave synth if modulation range is non zero
 set :midi_mod_synth, :mod_tri
 
+# intrument synths
+set :keys_synth, :dpulse
 
 # uncomment to disable play flags toggle with midi keyboard
 set :play_flags_keymap, [
