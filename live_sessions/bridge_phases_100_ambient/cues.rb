@@ -27,8 +27,8 @@ set :play_flags_keymap, [
 # uncomment to disable play flags toggle with midi keyboard
 #set :play_flags_keymap, nil
 
-# auto play in sequence, random mode, otherwise manual
-set :auto_play_mode, "random" # , "sequence" , nil
+# auto play by movement, in sequence, random mode, otherwise manual
+set :auto_play_mode, "movement" # , "sequence" , "random", nil
 
 # seed the random to the current second
 use_random_seed Time.new.sec
@@ -113,6 +113,55 @@ define :bridge_phases_ambient_100_random do | br |
   cue :phase, rrand_i(0,1) if rrand_i(0,32) == 0
 end
 
+# bridge phases ambient 100 bpm random mode
+define :bridge_phases_ambient_100_movements do | movement |
+  for flag in (get :play_flags_keymap) do
+    set flag, false
+  end
+  case movement
+  when "intro"
+    set :play_bass_base, true
+    set :play_chords_beat, true
+    set :play_cymbal_beat, true
+    cue :phase, 0
+  when "octave rnd beat"
+    set :play_bass_octave, true
+    set :play_chords_beat, true
+    set :play_cymbal_beat, true
+    set :play_chords_rnd_beat, true
+    cue :phase, 0
+  when "octave double"
+    set :play_bass_octave, true
+    set :play_chords_odd, true
+    set :play_cymbal_sub, true
+    cue :phase, 0
+  when "octave house"
+    set :play_bass_octave, true
+    set :play_chords_odd, true
+    set :play_cymbal_sub, true
+    set :play_drums_house, true
+    cue :phase, 0
+  when "bridge beat rnd house"
+    set :play_bass_base, true
+    set :play_chords_beat, true
+    set :play_cymbal_beat, true
+    set :play_drums_house, true
+    set :play_chords_rnd, true
+    cue :phase, 1
+  when "ambient bells base"
+    set :play_bass_base, true
+    set :play_chords_beat, true
+    set :play_cymbal_beat, true
+    set :play_ambient, true
+    set :play_bells_rnd, true
+    cue :phase, 1
+  when "haunted bells base"
+    set :play_haunted, true
+    set :play_bells_rnd, true
+    cue :phase, 1
+  end
+end
+
 cue :phase, 0
 cue :start
 
@@ -124,5 +173,24 @@ live_loop :cues do
     bridge_phases_ambient_100_sequence (get :n_bar)
   when "random"
     bridge_phases_ambient_100_random br
+  when "movement"
+    nb = (get :n_bar)
+    if nb < 16
+      bridge_phases_ambient_100_movements "intro"
+    elsif nb < 24
+      bridge_phases_ambient_100_movements "octave rnd beat"
+    elsif nb < 28
+      bridge_phases_ambient_100_movements "octave double"
+    elsif nb < 32
+      bridge_phases_ambient_100_movements "octave house"
+    elsif nb < 48
+      bridge_phases_ambient_100_movements "bridge beat rnd house"
+    elsif nb < 64
+      bridge_phases_ambient_100_movements "ambient bells base"
+    elsif nb < 72
+      bridge_phases_ambient_100_movements "haunted bells base"
+    else 
+      set :auto_play_mode, nil
+    end
   end
 end
