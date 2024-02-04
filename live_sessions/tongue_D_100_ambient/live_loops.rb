@@ -3,6 +3,16 @@
 sync :start
 use_bpm get(:bpm)
 
+
+# ---- movements
+
+live_loop :movements_cues do
+  mv = (sync :movement)[0]
+  tongue_drum_ambient_100_movements movement=mv
+end
+
+# ---- keys
+
 live_loop :keys_beat do
   bt, ch = (sync :beat)
   keys_chords_odd_sub_beat ch, am=4, sy=(get :keys_synth) if (get :play_chords_odd)

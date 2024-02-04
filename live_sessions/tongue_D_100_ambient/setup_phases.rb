@@ -51,46 +51,56 @@ set :play_flags_keymap, [
   :play_flag_dummy
 ]
 
-# clear play flags
-for flag in (get :play_flags_keymap) do
+# bridge phases ambient 100 bpm random mode
+define :tongue_drum_ambient_100_movements do | movement |
+  for flag in (get :play_flags_keymap) do
     set flag, false
+  end
+  case movement
+  when "intro"
+    set :play_bass_octave, true
+    set :play_cymbal_beat, true
+    cue :phase, 0
+  when "overture octave"
+    set :play_bass_octave, true
+    set :play_chords_odd, true
+    set :play_cymbal_sub, true
+    cue :phase, 0
+  when "overture double"
+    set :play_bass_root, true
+    set :play_drums_bass, true
+    set :play_chords_odd, true
+    set :play_cymbal_sub, true
+    cue :phase, 0
+  when "overture house"
+    set :play_bass_root, true
+    set :play_drums_house, true
+    set :play_chords_odd, true
+    set :play_cymbal_sub, true
+    cue :phase, 0
+  when "bridge octave"
+    set :play_bass_octave, true
+    set :play_cymbal_sub, true
+    set :play_drums_bass, true
+    cue :phase, 1
+  when "bridge house"
+    set :play_bass_octave, true
+    set :play_cymbal_sub, true
+    set :play_drums_house, true
+    cue :phase, 1
+  when "re ouverture dub"
+    set :play_bass_root, true
+    set :play_cymbal_sub, true
+    cue :phase, 0
+  when "outro house"
+    set :play_bass_root, true
+    set :play_drums_house, true
+    set :play_chords_odd, true
+    set :play_cymbal_sub, true
+    cue :phase, 2
+  end
 end
 
-# play flags mappings per live loop
-play_flags_bass_offset = 0
-play_flags_bass = [
-  nil, #:play_bass_octave,     # C1
-  nil, #:play_bass_root,
-]
-play_flags_cymbal_offset = 3
-play_flags_cymbal = [
-  nil, #:play_cymbal_beat,     
-  1, #:play_cymbal_sub,      # E1
-]
-play_flags_drums_offset = 5
-play_flags_drums = [
-  1, #:play_drums_bass,      # F1
-  nil, #:play_drums_house,
-]
-play_flags_keys_offset = 7
-play_flags_keys = [
-  1, #:play_chords_odd,      # G1
-]
-
-# set play flags
-for i in (0..play_flags_bass.length()-1) do
-      set (get :play_flags_keymap)[i + play_flags_bass_offset], play_flags_bass[i]
-end
-for i in (0..play_flags_cymbal.length()-1) do
-      set (get :play_flags_keymap)[i + play_flags_cymbal_offset], play_flags_cymbal[i]
-end
-for i in (0..play_flags_drums.length()-1) do
-      set (get :play_flags_keymap)[i + play_flags_drums_offset], play_flags_drums[i]
-end
-for i in (0..play_flags_keys.length()-1) do
-      set (get :play_flags_keymap)[i + play_flags_keys_offset], play_flags_keys[i]
-end
-
-cue :phase, 0
 cue :start
+cue :movement, "intro"
 
