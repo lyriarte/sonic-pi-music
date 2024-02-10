@@ -97,52 +97,52 @@ define :jungle_botz_120_movements do | movement |
   when "intro robot chords bar"
     set :play_chords_bar, true
     set :play_drums_bass, true
-    set :play_robot, true
+#    set :play_robot, true
     cue :phase, 0
   when "open rnd bass hihat"
     set :play_drums_bass, true
-    set :play_robot, true
+#    set :play_robot, true
     set :play_bass_rnd, true
     set :play_cymbal_sub, true
     cue :phase, 0
   when "open rnd bass keys slide"
     set :play_chords_slide, true
     set :play_drums_bass, true
-    set :play_robot, true
+#    set :play_robot, true
     set :play_bass_rnd, true
     set :play_cymbal_sub, true
     cue :phase, 0
   when "open rnd bass odd keys"
     set :play_chords_odd, true
     set :play_drums_bass, true
-    set :play_robot, true
+#    set :play_robot, true
     set :play_bass_rnd, true
     set :play_cymbal_sub, true
     cue :phase, 0
   when "octave bass"
     set :play_chords_odd, true
     set :play_drums_bass, true
-    set :play_robot, true
+#    set :play_robot, true
     set :play_bass_octave, true
     set :play_cymbal_sub, true
     cue :phase, 0
   when "jungle rnd bass keys"
     set :play_chords_rnd_beat, true
     set :play_drums_jungle, true
-    set :play_robot, true
+#    set :play_robot, true
     set :play_bass_rnd, true
     set :play_cymbal_beat, true
     cue :phase, 0
   when "jungle octave bass bridge rnd keys"
     set :play_chords_rnd_bar, true
     set :play_drums_jungle, true
-    set :play_robot, true
+#    set :play_robot, true
     set :play_bass_octave, true
     set :play_cymbal_beat, true
     cue :phase, 1
   when "jungle octave bass bridge"
     set :play_chords_rnd_bar, true
-    set :play_robot, true
+#    set :play_robot, true
     set :play_bass_octave, true
     set :play_cymbal_beat, true
     cue :phase, 1
