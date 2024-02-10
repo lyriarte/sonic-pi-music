@@ -11,6 +11,11 @@ live_loop :keys_beat do
   keys_chords_odd_sub_beat ch, am=4, sy=(get :keys_synth) if (get :play_chords_odd)
 end
 
+live_loop :keys_bar do
+  br, ch = (sync :bar)
+  keys_chords_bar ch, nb=(get :beats), am=4, sy=(get :keys_synth) if (get :play_chords_bar)
+end
+
 # ---- drum n bass
 
 live_loop :bass_beat do
@@ -93,4 +98,11 @@ define :keys_chords_odd_sub_beat do | ch, am=1, sy=:beep |
     play ch, amp: am, release: 0.1
   end
 end
+
+define :keys_chords_bar do | ch, nb=4, am=1, sy=:beep |
+  with_synth sy do
+    play ch, amp: am, release: nb
+  end
+end
+
 

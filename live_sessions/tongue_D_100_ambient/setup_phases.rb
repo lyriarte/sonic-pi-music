@@ -48,6 +48,7 @@ set :play_flags_keymap, [
   :play_drums_bass,      # F1
   :play_drums_house,
   :play_chords_odd,      # G1
+  :play_chords_bar,
   :play_flag_dummy
 ]
 
@@ -61,12 +62,12 @@ define :tongue_drum_ambient_100_movements do | movement |
   end
   case movement
   when "intro"
-    set :play_bass_octave, true
+    set :play_chords_bar, true
     set :play_cymbal_beat, true
     cue :phase, 0
   when "overture octave"
     set :play_bass_octave, true
-    set :play_chords_odd, true
+    set :play_chords_bar, true
     set :play_cymbal_sub, true
     cue :phase, 0
   when "overture double"
@@ -83,6 +84,7 @@ define :tongue_drum_ambient_100_movements do | movement |
     cue :phase, 0
   when "bridge octave"
     set :play_bass_octave, true
+    set :play_chords_bar, true
     set :play_cymbal_sub, true
     set :play_drums_bass, true
     cue :phase, 1
@@ -92,13 +94,12 @@ define :tongue_drum_ambient_100_movements do | movement |
     set :play_drums_house, true
     cue :phase, 1
   when "re overture dub"
-    set :play_bass_root, true
-    set :play_cymbal_sub, true
+    set :play_chords_bar, true
+    set :play_cymbal_beat, true
     cue :phase, 0
   when "outro house"
-    set :play_bass_root, true
-    set :play_drums_house, true
-    set :play_chords_odd, true
+    set :play_bass_octave, true
+    set :play_chords_bar, true
     set :play_cymbal_sub, true
     cue :phase, 2
   end
