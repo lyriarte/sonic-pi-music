@@ -23,7 +23,8 @@ set :play_flags_keymap, [
   :play_chords_rnd_bar,  # A1
   :play_chords_bar,     
   :play_chords_slide,    # B1
-  :play_robot            # C2
+  :play_robot,           # C2
+  :play_robot_rnd
 ]
 
 # uncomment to disable play flags toggle with midi keyboard
@@ -97,71 +98,68 @@ define :jungle_botz_120_movements do | movement |
   when "intro robot chords bar"
     set :play_chords_bar, true
     set :play_drums_bass, true
-#    set :play_robot, true
+    set :play_robot_rnd, true
     cue :phase, 0
   when "open rnd bass hihat"
     set :play_drums_bass, true
-#    set :play_robot, true
+    set :play_robot_rnd, true
     set :play_bass_rnd, true
     set :play_cymbal_sub, true
     cue :phase, 0
   when "open rnd bass keys slide"
     set :play_chords_slide, true
     set :play_drums_bass, true
-#    set :play_robot, true
+    set :play_robot_rnd, true
     set :play_bass_rnd, true
     set :play_cymbal_sub, true
     cue :phase, 0
   when "open rnd bass odd keys"
     set :play_chords_odd, true
     set :play_drums_bass, true
-#    set :play_robot, true
+    set :play_robot_rnd, true
     set :play_bass_rnd, true
     set :play_cymbal_sub, true
     cue :phase, 0
   when "octave bass"
     set :play_chords_odd, true
     set :play_drums_bass, true
-#    set :play_robot, true
+    set :play_robot_rnd, true
     set :play_bass_octave, true
     set :play_cymbal_sub, true
     cue :phase, 0
   when "jungle rnd bass keys"
     set :play_chords_rnd_beat, true
     set :play_drums_jungle, true
-#    set :play_robot, true
+    set :play_robot_rnd, true
     set :play_bass_rnd, true
     set :play_cymbal_beat, true
     cue :phase, 0
   when "jungle octave bass bridge rnd keys"
     set :play_chords_rnd_bar, true
     set :play_drums_jungle, true
-#    set :play_robot, true
+    set :play_robot_rnd, true
     set :play_bass_octave, true
     set :play_cymbal_beat, true
     cue :phase, 1
   when "jungle octave bass bridge"
     set :play_chords_rnd_bar, true
-#    set :play_robot, true
+    set :play_robot_rnd, true
     set :play_bass_octave, true
     set :play_cymbal_beat, true
     cue :phase, 1
   end
 end
 
-cue :phase, 0
-cue :start
-
 live_loop :cues do
   br, ch = (sync :bar)
   # toggle play flags according to total bars count if there is no keymap
   case get :auto_play_mode
   when "random"
-    jungle_botz_120_random brr
+    jungle_botz_120_random br
   when "movement"
     nb = (get :n_bar)
     if nb < 8
-      jungle_botz_120_movements "intro"
+      jungle_botz_120_movements "intro robot chords bar"
     elsif nb < 24
       jungle_botz_120_movements "open rnd bass hihat"
     elsif nb < 32
@@ -181,3 +179,7 @@ live_loop :cues do
     end
   end
 end
+
+cue :phase, 0
+cue :start
+

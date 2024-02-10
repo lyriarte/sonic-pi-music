@@ -27,7 +27,9 @@ end
 
 live_loop :sounds_beat do
   bt, ch = (sync :beat)
+  rnd = rrand(0,1)
   sample (choose [:mehackit_robot1, :mehackit_robot3, :mehackit_robot5]), amp: 2 if (get :play_robot)
+  sample (choose [:mehackit_robot1, :mehackit_robot3, :mehackit_robot5]), amp: 2 if (get :play_robot_rnd) and rnd.between?(0,0.05)
 end
 
 live_loop :sounds_bar do
