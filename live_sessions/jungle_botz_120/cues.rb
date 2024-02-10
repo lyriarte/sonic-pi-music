@@ -89,7 +89,7 @@ define :jungle_botz_120_random do | br |
   cue :phase, rrand_i(0,1) if rrand_i(0,32) == 0
 end
 
-# jungle botz 120 bpm random mode
+# jungle botz 120 bpm movements
 define :jungle_botz_120_movements do | movement |
   for flag in (get :play_flags_keymap) do
     set flag, false
@@ -180,6 +180,6 @@ live_loop :cues do
   end
 end
 
-cue :phase, 0
+jungle_botz_120_movements "intro robot chords bar"
 cue :start
 

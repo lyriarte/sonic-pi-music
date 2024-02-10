@@ -101,6 +101,6 @@ define :tongue_drum_ambient_100_movements do | movement |
   end
 end
 
+tongue_drum_ambient_100_movements "intro"
 cue :start
-cue :movement, "intro"
 

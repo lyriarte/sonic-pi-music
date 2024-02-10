@@ -113,7 +113,7 @@ define :bridge_phases_ambient_100_random do | br |
   cue :phase, rrand_i(0,1) if rrand_i(0,32) == 0
 end
 
-# bridge phases ambient 100 bpm random mode
+# bridge phases ambient 100 bpm movements
 define :bridge_phases_ambient_100_movements do | movement |
   for flag in (get :play_flags_keymap) do
     set flag, false
@@ -162,9 +162,6 @@ define :bridge_phases_ambient_100_movements do | movement |
   end
 end
 
-cue :phase, 0
-cue :start
-
 live_loop :cues do
   br, ch = (sync :bar)
   # toggle play flags according to total bars count if there is no keymap
@@ -194,3 +191,7 @@ live_loop :cues do
     end
   end
 end
+
+bridge_phases_ambient_100_movements "intro"
+cue :start
+
