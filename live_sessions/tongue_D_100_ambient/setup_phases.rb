@@ -51,6 +51,9 @@ set :play_flags_keymap, [
   :play_flag_dummy
 ]
 
+# auto play by movement, in sequence, random mode, otherwise manual
+set :auto_play_mode, "movement" # , "sequence" , "random", nil
+
 # bridge phases ambient 100 bpm random mode
 define :tongue_drum_ambient_100_movements do | movement |
   for flag in (get :play_flags_keymap) do
@@ -88,7 +91,7 @@ define :tongue_drum_ambient_100_movements do | movement |
     set :play_cymbal_sub, true
     set :play_drums_house, true
     cue :phase, 1
-  when "re ouverture dub"
+  when "re overture dub"
     set :play_bass_root, true
     set :play_cymbal_sub, true
     cue :phase, 0
@@ -98,6 +101,34 @@ define :tongue_drum_ambient_100_movements do | movement |
     set :play_chords_odd, true
     set :play_cymbal_sub, true
     cue :phase, 2
+  end
+end
+
+live_loop :cues do
+  br, ch = (sync :bar)
+  # toggle play flags according to total bars count if there is no keymap
+  case get :auto_play_mode
+  when "movement"
+    nb = (get :n_bar)
+    if nb < 8
+      tongue_drum_ambient_100_movements "intro"
+    elsif nb < 16
+      tongue_drum_ambient_100_movements "overture octave"
+    elsif nb < 24
+      tongue_drum_ambient_100_movements "overture double"
+    elsif nb < 48
+      tongue_drum_ambient_100_movements "overture house"
+    elsif nb < 52
+      tongue_drum_ambient_100_movements "bridge octave"
+    elsif nb < 68
+      tongue_drum_ambient_100_movements "bridge house"
+    elsif nb < 72
+      tongue_drum_ambient_100_movements "re overture dub"
+    elsif nb < 88
+      tongue_drum_ambient_100_movements "outro house"
+    else 
+      set :auto_play_mode, nil
+    end
   end
 end
 

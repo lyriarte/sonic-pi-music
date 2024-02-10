@@ -4,13 +4,6 @@ sync :start
 use_bpm get(:bpm)
 
 
-# ---- movements
-
-live_loop :movements_cues do
-  mv = (sync :movement)[0]
-  tongue_drum_ambient_100_movements movement=mv
-end
-
 # ---- keys
 
 live_loop :keys_beat do
