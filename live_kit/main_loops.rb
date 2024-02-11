@@ -64,3 +64,15 @@ live_loop :movement_phases do
   set :chords, (get :phases)[i_phase % (get :phases).length()]
   cue :phase_changed, i_phase
 end
+
+# sync on movements, cue phases
+live_loop :movements do
+  movement = (sync :movement)[0]
+  for flag in (get :play_flags_keymap) do
+    set flag, false
+  end
+  for flag in (get :movements_map)[movement]["flags"] do
+    set flag, true
+  end
+  cue :phase, (get :movements_map)[movement]["phase"]
+end
