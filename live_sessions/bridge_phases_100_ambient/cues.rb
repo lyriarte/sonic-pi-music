@@ -113,54 +113,15 @@ define :bridge_phases_ambient_100_random do | br |
   cue :phase, rrand_i(0,1) if rrand_i(0,32) == 0
 end
 
-# bridge phases ambient 100 bpm movements
-define :bridge_phases_ambient_100_movements do | movement |
-  for flag in (get :play_flags_keymap) do
-    set flag, false
-  end
-  case movement
-  when "intro"
-    set :play_bass_base, true
-    set :play_chords_beat, true
-    set :play_cymbal_beat, true
-    cue :phase, 0
-  when "octave rnd beat"
-    set :play_bass_octave, true
-    set :play_chords_beat, true
-    set :play_cymbal_beat, true
-    set :play_chords_rnd_beat, true
-    cue :phase, 0
-  when "octave double"
-    set :play_bass_octave, true
-    set :play_chords_odd, true
-    set :play_cymbal_sub, true
-    cue :phase, 0
-  when "octave house"
-    set :play_bass_octave, true
-    set :play_chords_odd, true
-    set :play_cymbal_sub, true
-    set :play_drums_house, true
-    cue :phase, 0
-  when "bridge beat rnd house"
-    set :play_bass_base, true
-    set :play_chords_beat, true
-    set :play_cymbal_beat, true
-    set :play_drums_house, true
-    set :play_chords_rnd, true
-    cue :phase, 1
-  when "ambient bells base"
-    set :play_bass_base, true
-    set :play_chords_beat, true
-    set :play_cymbal_beat, true
-    set :play_ambient, true
-    set :play_bells_rnd, true
-    cue :phase, 1
-  when "haunted bells base"
-    set :play_haunted, true
-    set :play_bells_rnd, true
-    cue :phase, 1
-  end
-end
+set :movements_map, {
+  "intro" => { "phase" => 0, "flags" => [:play_bass_base, :play_chords_beat, :play_cymbal_beat]},
+  "octave rnd beat" => { "phase" => 0, "flags" => [:play_bass_octave, :play_chords_beat, :play_cymbal_beat, :play_chords_rnd_beat]},
+  "octave double" => { "phase" => 0, "flags" => [:play_bass_octave, :play_chords_odd, :play_cymbal_sub]},
+  "octave house" => { "phase" => 0, "flags" => [:play_bass_octave, :play_chords_odd, :play_cymbal_sub, :play_drums_house]},
+  "bridge beat rnd house" => { "phase" => 1, "flags" => [:play_bass_base, :play_chords_beat, :play_cymbal_beat, :play_drums_house, :play_chords_rnd]},
+  "ambient bells base" => { "phase" => 1, "flags" => [:play_bass_base, :play_chords_beat, :play_cymbal_beat, :play_ambient, :play_bells_rnd]},
+  "haunted bells base" => { "phase" => 1, "flags" => [:play_haunted, :play_bells_rnd]}
+}
 
 live_loop :cues do
   br, ch = (sync :bar)
@@ -173,25 +134,27 @@ live_loop :cues do
   when "movement"
     nb = (get :n_bar)
     if nb < 16
-      bridge_phases_ambient_100_movements "intro"
+      cue :movement,  "intro"
     elsif nb < 24
-      bridge_phases_ambient_100_movements "octave rnd beat"
+      cue :movement,  "octave rnd beat"
     elsif nb < 28
-      bridge_phases_ambient_100_movements "octave double"
+      cue :movement,  "octave double"
     elsif nb < 32
-      bridge_phases_ambient_100_movements "octave house"
+      cue :movement,  "octave house"
     elsif nb < 48
-      bridge_phases_ambient_100_movements "bridge beat rnd house"
+      cue :movement,  "bridge beat rnd house"
     elsif nb < 64
-      bridge_phases_ambient_100_movements "ambient bells base"
+      cue :movement,  "ambient bells base"
     elsif nb < 72
-      bridge_phases_ambient_100_movements "haunted bells base"
-    else 
+      cue :movement,  "haunted bells base"
+    else
       set :auto_play_mode, nil
     end
   end
 end
 
-bridge_phases_ambient_100_movements "intro"
+
 cue :start
+cue :movement, "intro"
+
 
