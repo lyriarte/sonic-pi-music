@@ -89,66 +89,16 @@ define :jungle_botz_120_random do | br |
   cue :phase, rrand_i(0,1) if rrand_i(0,32) == 0
 end
 
-# jungle botz 120 bpm movements
-define :jungle_botz_120_movements do | movement |
-  for flag in (get :play_flags_keymap) do
-    set flag, false
-  end
-  case movement
-  when "intro robot chords bar"
-    set :play_chords_bar, true
-    set :play_drums_bass, true
-    set :play_robot_rnd, true
-    cue :phase, 0
-  when "open rnd bass hihat"
-    set :play_drums_bass, true
-    set :play_robot_rnd, true
-    set :play_bass_rnd, true
-    set :play_cymbal_sub, true
-    cue :phase, 0
-  when "open rnd bass keys slide"
-    set :play_chords_slide, true
-    set :play_drums_bass, true
-    set :play_robot_rnd, true
-    set :play_bass_rnd, true
-    set :play_cymbal_sub, true
-    cue :phase, 0
-  when "open rnd bass odd keys"
-    set :play_chords_odd, true
-    set :play_drums_bass, true
-    set :play_robot_rnd, true
-    set :play_bass_rnd, true
-    set :play_cymbal_sub, true
-    cue :phase, 0
-  when "octave bass"
-    set :play_chords_odd, true
-    set :play_drums_bass, true
-    set :play_robot_rnd, true
-    set :play_bass_octave, true
-    set :play_cymbal_sub, true
-    cue :phase, 0
-  when "jungle rnd bass keys"
-    set :play_chords_rnd_beat, true
-    set :play_drums_jungle, true
-    set :play_robot_rnd, true
-    set :play_bass_rnd, true
-    set :play_cymbal_beat, true
-    cue :phase, 0
-  when "jungle octave bass bridge rnd keys"
-    set :play_chords_rnd_bar, true
-    set :play_drums_jungle, true
-    set :play_robot_rnd, true
-    set :play_bass_octave, true
-    set :play_cymbal_beat, true
-    cue :phase, 1
-  when "jungle octave bass bridge"
-    set :play_chords_rnd_bar, true
-    set :play_robot_rnd, true
-    set :play_bass_octave, true
-    set :play_cymbal_beat, true
-    cue :phase, 1
-  end
-end
+set :movements_map, {
+  "intro robot chords bar" => { "phase" => 0, "flags" => [:play_chords_bar, :play_drums_bass, :play_robot_rnd]},
+  "open rnd bass hihat" => { "phase" => 0, "flags" => [:play_drums_bass, :play_robot_rnd, :play_bass_rnd, :play_cymbal_sub]},
+  "open rnd bass keys slide" => { "phase" => 0, "flags" => [:play_chords_slide, :play_drums_bass, :play_robot_rnd, :play_bass_rnd, :play_cymbal_sub]},
+  "open rnd bass odd keys" => { "phase" => 0, "flags" => [:play_chords_odd, :play_drums_bass, :play_robot_rnd, :play_bass_rnd, :play_cymbal_sub]},
+  "octave bass" => { "phase" => 0, "flags" => [:play_chords_odd, :play_drums_bass, :play_robot_rnd, :play_bass_octave, :play_cymbal_sub]},
+  "jungle rnd bass keys" => { "phase" => 0, "flags" => [:play_chords_rnd_beat, :play_drums_jungle, :play_robot_rnd, :play_bass_rnd, :play_cymbal_beat]},
+  "jungle octave bass bridge rnd keys" => { "phase" => 1, "flags" => [:play_chords_rnd_bar, :play_drums_jungle, :play_robot_rnd, :play_bass_octave, :play_cymbal_beat]},
+  "jungle octave bass bridge" => { "phase" => 1, "flags" => [:play_chords_rnd_bar, :play_robot_rnd, :play_bass_octave, :play_cymbal_beat]},
+}
 
 live_loop :cues do
   br, ch = (sync :bar)
@@ -159,27 +109,27 @@ live_loop :cues do
   when "movement"
     nb = (get :n_bar)
     if nb < 8
-      jungle_botz_120_movements "intro robot chords bar"
+      cue :movement,   "intro robot chords bar"
     elsif nb < 24
-      jungle_botz_120_movements "open rnd bass hihat"
+      cue :movement,   "open rnd bass hihat"
     elsif nb < 32
-      jungle_botz_120_movements "open rnd bass keys slide"
+      cue :movement,   "open rnd bass keys slide"
     elsif nb < 48
-      jungle_botz_120_movements "open rnd bass odd keys"
+      cue :movement,   "open rnd bass odd keys"
     elsif nb < 52
-      jungle_botz_120_movements "octave bass"
+      cue :movement,   "octave bass"
     elsif nb < 64
-      jungle_botz_120_movements "jungle rnd bass keys"
+      cue :movement,   "jungle rnd bass keys"
     elsif nb < 80
-      jungle_botz_120_movements "jungle octave bass bridge rnd keys"
+      cue :movement,   "jungle octave bass bridge rnd keys"
     elsif nb < 88
-      jungle_botz_120_movements "jungle octave bass bridge"
-    else 
+      cue :movement,   "jungle octave bass bridge"
+    else
       set :auto_play_mode, nil
     end
   end
 end
 
-jungle_botz_120_movements "intro robot chords bar"
 cue :start
+cue :movement,   "intro robot chords bar"
 
