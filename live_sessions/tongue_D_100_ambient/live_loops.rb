@@ -13,7 +13,7 @@ end
 
 live_loop :keys_bar do
   br, ch = (sync :bar)
-  keys_chords_bar ch, nb=(get :beats), am=4, sy=(get :keys_synth) if (get :play_chords_bar)
+  keys_chords_bar ch, nb=(get :beats), am=0.5, sy=(get :keys_synth) if (get :play_chords_bar)
 end
 
 # ---- drum n bass
@@ -101,7 +101,7 @@ end
 
 define :keys_chords_bar do | ch, nb=4, am=1, sy=:beep |
   with_synth sy do
-    play ch, amp: am, release: nb
+    play ch, amp: am, release: nb, attack: 0.5
   end
 end
 
