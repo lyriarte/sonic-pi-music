@@ -80,13 +80,13 @@ live_loop :cues do
       cue :movement, "overture double"
     elsif nb < 48
       cue :movement, "overture house"
-    elsif nb < 52
+    elsif nb < 56
       cue :movement, "bridge octave"
-    elsif nb < 68
-      cue :movement, "bridge house"
     elsif nb < 72
-      cue :movement, "re overture dub"
+      cue :movement, "bridge house"
     elsif nb < 88
+      cue :movement, "re overture dub"
+    elsif nb < 96
       cue :movement, "outro house"
     else
       set :auto_play_mode, nil
