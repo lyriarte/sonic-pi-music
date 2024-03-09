@@ -23,7 +23,24 @@ live_loop :cymbals_beat do
   sample :drum_cymbal_closed, amp: 0.5 if (get :play_cymbal_beat)
 end
 
+live_loop :drums_beat do
+  bt = (sync :beat)[0]
+  drums_house_odd_snare bt if (get :play_drums_house)
+end
+
 # ---- ---- ---- ---- cymbals and drums
+
+# open hi hat on half beat, snare on 2 and 4
+define :drums_house_odd_snare do | bt, am=1|
+  if (bt % 2) == 0
+    sample :drum_heavy_kick, amp: am
+  else
+    sample :drum_snare_hard, amp: am
+  end
+  sleep 0.5
+  sample :drum_cymbal_pedal, amp: am
+end
+
 
 # ---- ---- ---- ---- bass
 
