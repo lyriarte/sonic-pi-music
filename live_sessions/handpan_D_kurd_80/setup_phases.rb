@@ -6,7 +6,13 @@ set :sub_beat, 4
 
 set :phases, [
   [
+    (chord :D4, :minor),  (chord :A3, :minor),
+    (chord :A3, :minor),  (chord :D4, :minor),
+  ].ring,
+  [
+    (chord :C4, :major),  (chord :Bb3,:major),
     (chord :D4, :minor),  (chord :D4, :minor),
+    (chord :C4, :major),  (chord :Bb3,:major),
     (chord :A3, :minor),  (chord :A3, :minor),
   ].ring,
 ]
@@ -14,7 +20,7 @@ set :phases, [
 set :chords, (get :phases)[0]
 
 
-set :start_beats, false
+set :start_beats, true
 set :use_midi_chord, nil
 
 # default midi synths
@@ -38,4 +44,5 @@ set :auto_play_mode, "movement" # , "sequence" , "random", nil
 set :movements_map, {
   "ambient" => { "phase" => 0, "flags" => [:play_chords_bar, :play_cymbal_beat]},
   "pulse" => { "phase" => 0, "flags" => [:play_chords_bar, :play_cymbal_beat, :play_bass_root]},
+  "bridge" => { "phase" => 0, "flags" => [:play_chords_bar, :play_cymbal_beat, :play_bass_root]},
 }
