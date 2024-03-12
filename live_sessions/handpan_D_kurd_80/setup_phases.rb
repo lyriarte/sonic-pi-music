@@ -37,6 +37,7 @@ set :play_flags_keymap, [
   :play_cymbal_beat,
   :play_bass_root,      # D1
   :play_drums_house,
+  :play_chords_house,   # E1
 ]
 
 # auto play by movement, in sequence, random mode, otherwise manual
@@ -45,6 +46,6 @@ set :auto_play_mode, "movement" # , "sequence" , "random", nil
 set :movements_map, {
   "ambient" => { "phase" => 0, "flags" => [:play_chords_bar, :play_cymbal_beat]},
   "pulse" => { "phase" => 0, "flags" => [:play_chords_bar, :play_cymbal_beat, :play_bass_root]},
-  "bridge" => { "phase" => 1, "flags" => [:play_chords_bar, :play_cymbal_beat, :play_bass_root]},
-  "house" => { "phase" => 0, "flags" => [:play_chords_bar, :play_drums_house]},
+  "bridge" => { "phase" => 1, "flags" => [:play_chords_house, :play_cymbal_beat, :play_bass_root]},
+  "house" => { "phase" => 0, "flags" => [:play_chords_house, :play_drums_house]},
 }

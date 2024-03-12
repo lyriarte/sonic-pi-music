@@ -9,6 +9,7 @@ use_bpm get(:bpm)
 live_loop :keys_bar do
   br, ch = (sync :bar)
   keys_chords_bar ch, nb=(get :beats), am=0.5, sy=(get :keys_synth) if (get :play_chords_bar)
+  keys_bar_house ch, nb=(get :beats), am=0.5, sy=(get :keys_synth) if (get :play_chords_house)
 end
 
 # ---- drum n bass
@@ -66,4 +67,20 @@ define :keys_chords_bar do | ch, nb=4, am=1, sy=:beep |
   end
 end
 
+
+# acid house pattern
+define :keys_bar_house do | ch, nb=4, am=1, sy=:dpulse |
+  with_synth sy do
+    [0,0.25,0.25,0.25,0.25,0.25].each do | i |
+      sleep i
+      play_chord ch, release: 0.2
+    end
+    sleep 0.25
+    play_chord ch, release: 2, decay: 0.5
+    [2,0.5].each do | i |
+      sleep i
+      play_chord ch, release: 0.2
+    end
+  end
+end
 
