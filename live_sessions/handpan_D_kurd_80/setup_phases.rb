@@ -5,10 +5,15 @@ set :beats, 4
 set :sub_beat, 4
 
 set :phases, [
-  [
-    (chord :D4, :minor),  (chord :A3, :minor),
-    (chord :A3, :minor),  (chord :D4, :minor),
-  ].ring,
+  (
+   [(chord :D4, :minor),  (chord :A3, :minor),
+    (chord :A3, :minor),  (chord :D4, :minor)] * 2 +
+   [(chord :Bb3,:major),  (chord :D4, :minor),
+    (chord :Bb3,:major),  (chord :A3, :minor),
+    (chord :Bb3,:major),  (chord :D4, :minor),
+    (chord :G3, :minor),  (chord :A3, :minor)
+   ]
+  ).ring,
   [
     (chord :C4, :major),  (chord :Bb3,:major),
     (chord :D4, :minor),  (chord :D4, :minor),
