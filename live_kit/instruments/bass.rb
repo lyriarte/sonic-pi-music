@@ -1,14 +1,38 @@
 # ---- ---- ---- ---- bass
 
+set :bass_play_flags, [
+  # beat
+  :play_bass_sub_beat,
+  :play_bass_rnd_double_beat,
+  :play_bass_octave_double_beat,
+  :play_bass_octave_odd_beat,
+  # bar
+  :play_bass_base_beat,
+  :play_bass_walking,
+  :play_bass_latin_beat_4,
+  :play_bass_root_rnd
+]
+
 sync :start
 use_bpm get(:bpm)
 
 
 # ---- live loops
 
-live_loop :bass do
-  bt, ch = sync :beat
-  bass_octave_odd_beat ch, bt
+live_loop :bass_beat do
+  bt, ch = (sync :beat)
+  bass_sub_beat ch, sb = get(:sub_beat) if (get :play_bass_sub_beat)
+  bass_rnd_double_beat ch if (get :play_bass_rnd_double_beat)
+  bass_octave_double_beat ch if (get :play_bass_octave_double_beat)
+  bass_octave_odd_beat ch if (get :play_bass_octave_odd_beat)
+end
+
+live_loop :bass_bar do
+  br, ch = (sync :bar)
+  bass_base_beat ch, nb = get(:beats) if (get :play_bass_base_beat)
+  bass_walking ch, nb = get(:beats) if (get :play_bass_walking)
+  bass_latin_beat_4 ch if (get :play_bass_latin_beat_4)
+  bass_root_rnd ch, nb = get(:beats) if (get :play_bass_root_rnd)
 end
 
 
