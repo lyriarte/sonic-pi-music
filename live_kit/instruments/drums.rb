@@ -1,19 +1,56 @@
 # ---- ---- ---- ---- cymbals and drums
 
+set :drums_play_flags, [
+  # cymbals beat
+  :play_cymbals_sub_beat,
+  :play_cymbals_hh_open_beat,
+  # cymbals bar
+  :play_cymbals_swing_sub_3_beat_4,
+  :play_cymbals_swing_sub_double_3,
+  # drums beat
+  :drums_house_odd_snare,
+  :play_drums_bass_disco_beat,
+  # drums bar
+  :play_drums_sparse_beat_4,
+  :play_drums_base_beat_4,
+  :play_drums_binary_beat_4,
+  :play_drums_double_beat_4,
+  :play_drums_jungle_beat_4,
+  :play_drums_bossa_beat_4
+]
+
 sync :start
 use_bpm get(:bpm)
 
 
 # ---- live loops
 
-live_loop :cymbals do
-  sync :beat
-  drums_cymbals_sub_beat sb = get(:sub_beat)
+live_loop :cymbals_beat do
+  bt, ch = sync :beat
+  drums_cymbals_sub_beat sb = get(:sub_beat) if (get :play_cymbals_sub_beat)
+  drums_cymbals_hh_open_beat sb = get(:sub_beat) if (get :play_cymbals_hh_open_beat)
 end
 
-live_loop :drums do
-  bt = (sync :beat)[0]
-  drums_house_odd_snare bt
+live_loop :cymbals_bar do
+  br, ch = (sync :bar)
+  drums_cymbals_swing_sub_3_beat_4 sb = get(:sub_beat) if (get :play_cymbals_swing_sub_3_beat_4)
+  drums_cymbals_swing_sub_double_3 sb = get(:sub_beat) if (get :play_cymbals_swing_sub_double_3)
+end
+
+live_loop :drums_beat do
+  bt, ch = sync :beat
+  drums_house_odd_snare bt if (get :play_drums_house_odd_snare)
+  drums_bass_disco_beat if (get :play_drums_bass_disco_beat)
+end
+
+live_loop :drums_bar do
+  br, ch = (sync :bar)
+  drums_sparse_beat_4 if (get :play_drums_sparse_beat_4)
+  drums_base_beat_4 if (get :play_drums_base_beat_4)
+  drums_binary_beat_4 if (get :play_drums_binary_beat_4)
+  drums_double_beat_4 if (get :play_drums_double_beat_4)
+  drums_jungle_beat_4 if (get :play_drums_jungle_beat_4)
+  drums_bossa_beat_4 if (get :play_drums_bossa_beat_4)
 end
 
 
