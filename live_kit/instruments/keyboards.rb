@@ -1,14 +1,40 @@
 # ---- ---- ---- ---- keyboards
 
+set :bass_play_flags, [
+  # beat
+  :play_keys_chords_beat,
+  :play_keys_chords_odd_sub_beat,
+  :play_keys_rnd_dbl_sub_beat,
+  :play_keys_rnd_sub_slide,
+  # bar
+  :play_keys_chords_bar,
+  :play_keys_rnd_bar_slide,
+  :play_bar_slide,
+  :play_keys_latin_2_bar_4,
+  :play_keys_bar_house
+]
+
 sync :start
 use_bpm get(:bpm)
 
 
 # ---- live loops
 
-live_loop :keys do
-  ch = (sync :beat)[1]
-  keys_rnd_sub_slide ch, (get :sub_beat)
+live_loop :keys_beat do
+  bt, ch = (sync :beat)
+  keys_chords_beat ch if (get :play_keys_chords_beat)
+  keys_chords_odd_sub_beat ch if (get :play_keys_chords_odd_sub_beat)
+  keys_rnd_dbl_sub_beat ch, (get :sub_beat) if (get :play_keys_rnd_dbl_sub_beat)
+  keys_rnd_sub_slide ch, (get :sub_beat) if (get :play_keys_rnd_sub_slide)
+end
+
+live_loop :keys_bar do
+  br, ch = (sync :bar)
+  keys_chords_bar ch, (get :beats) if (get :play_keys_chords_bar)
+  keys_rnd_bar_slide ch, (get :beats) if (get :play_keys_rnd_bar_slide)
+  bar_slide ch, (get :beats) if (get :play_bar_slide)
+  keys_latin_2_bar_4 ch, (get :beats) if (get :play_keys_latin_2_bar_4)
+  keys_bar_house ch, (get :beats) if (get :play_keys_bar_house)
 end
 
 # ---- sync :beat
