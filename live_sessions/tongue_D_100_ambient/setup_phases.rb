@@ -40,15 +40,15 @@ set :bass_synth, :chipbass
 
 # uncomment to disable play flags toggle with midi keyboard
 set :play_flags_keymap, [
-  :play_bass_octave,     # C1
-  :play_bass_root,
+  :play_bass_octave_odd_beat,# C1
+  :play_bass_sub_beat,
   :play_flag_dummy,      # D1
-  :play_cymbal_beat,
-  :play_cymbal_sub,      # E1
-  :play_drums_bass,      # F1
-  :play_drums_house,
-  :play_chords_odd,      # G1
-  :play_chords_bar,
+  :play_cymbals_beat,
+  :play_cymbals_sub_beat,# E1
+  :play_drums_bass_disco_beat,      # F1
+  :play_drums_house_odd_snare,
+  :play_keys_chords_odd_sub_beat,      # G1
+  :play_keys_chords_bar,
   :play_flag_dummy
 ]
 
@@ -56,14 +56,14 @@ set :play_flags_keymap, [
 set :auto_play_mode, "movement" # , "sequence" , "random", nil
 
 set :movements_map, {
-  "intro" => { "phase" => 0, "flags" => [:play_chords_bar, :play_cymbal_beat]},
-  "overture octave"  => { "phase" => 0, "flags" => [:play_bass_octave, :play_chords_bar, :play_cymbal_sub]},
-  "overture double"  => { "phase" => 0, "flags" => [:play_bass_root, :play_drums_bass, :play_chords_odd, :play_cymbal_sub]},
-  "overture house"  => { "phase" => 0, "flags" => [:play_bass_root, :play_drums_house, :play_chords_odd, :play_cymbal_sub]},
-  "bridge octave"  => { "phase" => 1, "flags" => [:play_bass_octave, :play_chords_bar, :play_cymbal_sub, :play_drums_bass]},
-  "bridge house"  => { "phase" => 1, "flags" => [:play_bass_octave, :play_cymbal_sub, :play_drums_house]},
-  "re overture dub"  => { "phase" => 0, "flags" => [:play_chords_bar, :play_cymbal_beat]},
-  "outro house"  => { "phase" => 2, "flags" => [:play_bass_octave, :play_chords_bar, :play_cymbal_sub]}
+  "intro" => { "phase" => 0, "flags" => [:play_keys_chords_bar, :play_cymbals_beat]},
+  "overture octave"  => { "phase" => 0, "flags" => [:play_bass_octave_odd_beat, :play_keys_chords_bar, :play_cymbals_sub_beat]},
+  "overture double"  => { "phase" => 0, "flags" => [:play_bass_sub_beat, :play_drums_bass_disco_beat, :play_keys_chords_odd_sub_beat, :play_cymbals_sub_beat]},
+  "overture house"  => { "phase" => 0, "flags" => [:play_bass_sub_beat, :play_drums_house_odd_snare, :play_keys_chords_odd_sub_beat, :play_cymbals_sub_beat]},
+  "bridge octave"  => { "phase" => 1, "flags" => [:play_bass_octave_odd_beat, :play_keys_chords_bar, :play_cymbals_sub_beat, :play_drums_bass_disco_beat]},
+  "bridge house"  => { "phase" => 1, "flags" => [:play_bass_octave_odd_beat, :play_cymbals_sub_beat, :play_drums_house_odd_snare]},
+  "re overture dub"  => { "phase" => 0, "flags" => [:play_keys_chords_bar, :play_cymbals_beat]},
+  "outro house"  => { "phase" => 2, "flags" => [:play_bass_octave_odd_beat, :play_keys_chords_bar, :play_cymbals_sub_beat]}
 }
 
 live_loop :cues do
