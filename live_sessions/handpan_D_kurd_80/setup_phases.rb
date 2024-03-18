@@ -36,19 +36,19 @@ set :bass_synth, :chipbass
 
 # uncomment to disable play flags toggle with midi keyboard
 set :play_flags_keymap, [
-  :play_chords_bar,     # C1
-  :play_cymbal_beat,
-  :play_bass_root,      # D1
-  :play_drums_house,
-  :play_chords_house,   # E1
+  :play_keys_chords_bar,     # C1
+  :play_cymbals_beat,
+  :play_bass_sub_beat,      # D1
+  :play_drums_house_odd_snare,
+  :play_keys_bar_house,   # E1
 ]
 
 # auto play by movement, in sequence, random mode, otherwise manual
 set :auto_play_mode, "movement" # , "sequence" , "random", nil
 
 set :movements_map, {
-  "ambient" => { "phase" => 0, "flags" => [:play_chords_bar, :play_cymbal_beat]},
-  "pulse" => { "phase" => 0, "flags" => [:play_chords_bar, :play_cymbal_beat, :play_bass_root]},
-  "bridge" => { "phase" => 1, "flags" => [:play_chords_house, :play_cymbal_beat, :play_bass_root]},
-  "house" => { "phase" => 0, "flags" => [:play_chords_house, :play_drums_house]},
+  "ambient" => { "phase" => 0, "flags" => [:play_keys_chords_bar, :play_cymbals_beat]},
+  "pulse" => { "phase" => 0, "flags" => [:play_keys_chords_bar, :play_cymbals_beat, :play_bass_sub_beat]},
+  "bridge" => { "phase" => 1, "flags" => [:play_keys_bar_house, :play_cymbals_beat, :play_bass_sub_beat]},
+  "house" => { "phase" => 0, "flags" => [:play_keys_bar_house, :play_drums_house_odd_snare]},
 }
