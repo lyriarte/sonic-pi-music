@@ -1,6 +1,6 @@
 # ---- ---- ---- ---- keyboards
 
-set :bass_play_flags, [
+set :keys_play_flags, [
   # beat
   :play_keys_chords_beat,
   :play_keys_chords_odd_sub_beat,

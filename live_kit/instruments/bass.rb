@@ -24,7 +24,7 @@ live_loop :bass_beat do
   bass_sub_beat ch, sb = get(:sub_beat) if (get :play_bass_sub_beat)
   bass_rnd_double_beat ch if (get :play_bass_rnd_double_beat)
   bass_octave_double_beat ch if (get :play_bass_octave_double_beat)
-  bass_octave_odd_beat ch if (get :play_bass_octave_odd_beat)
+  bass_octave_odd_beat ch, bt if (get :play_bass_octave_odd_beat)
 end
 
 live_loop :bass_bar do

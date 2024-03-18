@@ -2,13 +2,14 @@
 
 set :drums_play_flags, [
   # cymbals beat
+  :play_cymbals_beat,
   :play_cymbals_sub_beat,
   :play_cymbals_hh_open_beat,
   # cymbals bar
   :play_cymbals_swing_sub_3_beat_4,
   :play_cymbals_swing_sub_double_3,
   # drums beat
-  :drums_house_odd_snare,
+  :play_drums_house_odd_snare,
   :play_drums_bass_disco_beat,
   # drums bar
   :play_drums_sparse_beat_4,
@@ -27,6 +28,7 @@ use_bpm get(:bpm)
 
 live_loop :cymbals_beat do
   bt, ch = sync :beat
+  sample :drum_cymbal_closed, amp: 0.5 if (get :play_cymbals_beat)
   drums_cymbals_sub_beat sb = get(:sub_beat) if (get :play_cymbals_sub_beat)
   drums_cymbals_hh_open_beat sb = get(:sub_beat) if (get :play_cymbals_hh_open_beat)
 end
