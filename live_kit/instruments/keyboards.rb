@@ -14,6 +14,10 @@ set :keys_play_flags, [
   :play_keys_bar_house
 ]
 
+for flag in (get :keys_play_flags) do
+  set flag, false
+end
+
 sync :start
 use_bpm get(:bpm)
 

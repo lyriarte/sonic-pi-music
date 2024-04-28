@@ -20,6 +20,10 @@ set :drums_play_flags, [
   :play_drums_bossa_beat_4
 ]
 
+for flag in (get :drums_play_flags) do
+  set flag, false
+end
+
 sync :start
 use_bpm get(:bpm)
 

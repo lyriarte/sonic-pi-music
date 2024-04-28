@@ -13,6 +13,10 @@ set :bass_play_flags, [
   :play_bass_root_rnd
 ]
 
+for flag in (get :bass_play_flags) do
+  set flag, false
+end
+
 sync :start
 use_bpm get(:bpm)
 
