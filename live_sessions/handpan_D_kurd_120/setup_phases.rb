@@ -20,6 +20,15 @@ set :phases, [
    [(chord :Bb3,:major),  (chord :Bb3,:major)] * 2 +
    [(chord :C4, :major),  (chord :C4, :major)] * 2
   ).ring,
+  (
+   [(chord :C4, :major),  (chord :Bb4,:major),
+    (chord :D4, :minor),  (chord :D4, :minor)] * 3 +
+   [(chord :A4, :minor),  (chord :A4, :minor)] * 2
+  ).ring,
+  (
+   [(chord :A4, :minor),  (chord :A4, :minor),
+    (chord :Bb4,:major),  (chord :Bb4,:major)]
+  ).ring,
 ]
 
 set :chords, (get :phases)[0]
