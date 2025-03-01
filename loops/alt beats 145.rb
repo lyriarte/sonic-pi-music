@@ -28,6 +28,31 @@ define :play_kbd do | ch, nb=4, am=1 |
   sleep nb
 end
 
+
+define :play_dark_ambi_slide do | ch, nb=4, am=1, sy=:dark_ambience |
+  with_synth sy do
+    n0 = [ch[1], ch[2]].choose()
+    n1 = ch[0]
+    p0 = play n0, attack: 1, note_slide: nb, release: nb*2, decay: 2, amp: am/2
+    control p0, note: n1
+    sleep nb
+  end
+end
+
+define :play_rnd_dbl do | ch, nb=4, am=1, sy=:chipbass |
+  sb=4
+  with_synth sy do
+    nb.times do
+      play ch.choose, attack: 0.02, release: 0.05, amp: am
+      (2*sb - 1).times do
+        sleep 1/Float(2*sb)
+        play ch.choose, attack: 0.02, release: 0.05, amp: am/2, pan: (rrand -1, 1)
+      end
+      sleep 1/Float(2*sb)
+    end
+  end
+end
+
 movements_map = {
   "intro 5/4" => { "phase" => 0, "beats" => 5, "mesures" => (16*4)},
   "tense 4/4"  => { "phase" => 1, "beats" => 4, "mesures" => (2*4)},
@@ -49,29 +74,31 @@ live_loop :chords do
   sleep intro_beats
   movement = movements_map["intro 5/4"]
   movement["mesures"].times do
-    play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=0.5
+    #play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=0.5
+    sleep(movement["beats"])
   end
   movement = movements_map["tense 4/4"]
   movement["mesures"].times do
-    play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=1
+    #play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=1
+    sleep(movement["beats"])
   end
   movement = movements_map["chord 4/4"]
   movement["mesures"].times do
-    play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=0.5
+    play_rnd_dbl phases[movement["phase"]].tick(), nb=movement["beats"], am=0.5
   end
   movement = movements_map["climax 4/4"]
   movement["mesures"].times do
-    play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=0.5
+    play_dark_ambi_slide phases[movement["phase"]].tick(), nb=movement["beats"], am=2
   end
   movement = movements_map["outro 5/4"]
   movement["mesures"].times do
-    play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=0.2
+    play_dark_ambi_slide phases[movement["phase"]].tick(), nb=movement["beats"], am=4
   end
   sync :done
 end
 
 live_loop :hh do
-  total_beats.times do
+  intro_beats.times do
     sample :drum_cymbal_closed
     sleep 1
   end
