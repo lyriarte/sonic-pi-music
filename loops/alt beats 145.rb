@@ -28,29 +28,50 @@ define :play_kbd do | ch, nb=4, am=1 |
   sleep nb
 end
 
+movements_map = {
+  "intro 5/4" => { "phase" => 0, "beats" => 5, "mesures" => (16*4)},
+  "tense 4/4"  => { "phase" => 1, "beats" => 4, "mesures" => (2*4)},
+  "chord 4/4"  => { "phase" => 2, "beats" => 2, "mesures" => (8*4)},
+  "climax 4/4"  => { "phase" => 1, "beats" => 4, "mesures" => (6*4)},
+  "outro 5/4"  => { "phase" => 0, "beats" => 5, "mesures" => (4*4)},
+}
+
+intro_beats = 10
+
+total_beats = intro_beats
+movements_map.each do | k, v |
+  total_beats = total_beats + v["mesures"] * v["beats"]
+end
+
+
 live_loop :chords do
   use_synth :tb303
-  sleep 10
-  (16*4).times do
-    play_kbd phases[0].tick(), nb=5, am=0.5
+  sleep intro_beats
+  movement = movements_map["intro 5/4"]
+  movement["mesures"].times do
+    play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=0.5
   end
-  (1*8).times do
-    play_kbd phases[1].tick(), nb=4, am=1
+  movement = movements_map["tense 4/4"]
+  movement["mesures"].times do
+    play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=1
   end
-  (8*4).times do
-    play_kbd phases[2].tick(), nb=2, am=0.5
+  movement = movements_map["chord 4/4"]
+  movement["mesures"].times do
+    play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=0.5
   end
-  (3*8).times do
-    play_kbd phases[1].tick(), nb=4, am=0.5
+  movement = movements_map["climax 4/4"]
+  movement["mesures"].times do
+    play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=0.5
   end
-  (4*4).times do
-    play_kbd phases[0].tick(), nb=5, am=0.2
+  movement = movements_map["outro 5/4"]
+  movement["mesures"].times do
+    play_kbd phases[movement["phase"]].tick(), nb=movement["beats"], am=0.2
   end
   sync :done
 end
 
 live_loop :hh do
-  (10+16*4*5+1*8*4+8*4*2+3*8*4+4*4*5).times do
+  total_beats.times do
     sample :drum_cymbal_closed
     sleep 1
   end
